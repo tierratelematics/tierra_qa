@@ -39,9 +39,11 @@ Prerequisites:
 * virtualenv
 * Firefox, Chrome, etc
 
-Clone the tierra_qa package and run:
+Clone the ``tierra_qa`` package and run:
 
     $ python setup.py develop
+
+*NOTE WELL*: there is a known problem during develop. If you want to install correctly ``tierra_qa`` you have to run twice the above command
 
 How to use it
 -------------
