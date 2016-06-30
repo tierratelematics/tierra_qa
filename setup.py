@@ -34,5 +34,7 @@ setup(name='tierra_qa',
       ],
       entry_points="""
       # -*- Entry points: -*-
+      [console_scripts]
+      tierra_qa_clone = tierra_qa.scripts:tierra_qa_clone
       """,
       )
