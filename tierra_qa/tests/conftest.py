@@ -143,4 +143,4 @@ def loggedin_selenium(base_selenium, username, password):
 #    submit_field.click()
 #    sleep(3)
 #
-#    return base_selenium
+    return base_selenium
