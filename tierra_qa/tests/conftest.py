@@ -41,9 +41,11 @@ Fixture dependencies
    }
 """
 
+import urlparse
 import os
 import pytest
 import pytest
+from _pytest import python
 from time import sleep
 import tierra_qa
 
@@ -117,19 +119,27 @@ def password(credentials_mapping, request):
     return credentials_mapping[userid]['password']
 
 @pytest.fixture
-def base_selenium(base_url, selenium):
-    """ Returns a selenium instance pointing to the base_url (not logged in)
-        
+def base_selenium(base_url, selenium, request):
+    """ Returns a selenium instance pointing to the base_url (not logged in).
+        Optionally base_url + page if available.
     """
-    selenium.get(base_url)
+    page = None
+    try:
+       page = request.getfuncargvalue('page')
+    except python.FixtureLookupError:
+        pass
+    url = base_url
+    if page:
+        url = urlparse.urljoin(base_url, page)
+    selenium.get(url)
     sleep(10)
     return selenium
 
 @pytest.fixture
 def loggedin_selenium(base_selenium, username, password):
     """ Returns a logged in selenium session on the marked user
-        for a specific base_url (but you can override username and
-        password fixtures using conftest.py inheritance acquisition)
+        for a specific url (but you can override username and
+        password fixtures using conftest.py inheritance acquisition).
     """
 #    # fill in username and password
 #    username_field = base_selenium.find_element_by_id('txtUsr')
