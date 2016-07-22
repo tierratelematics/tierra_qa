@@ -41,7 +41,13 @@ Fixture dependencies
    }
 """
 
-import urlparse
+
+try:
+    from urlparse import urljoin
+except ImportError:
+    # python3 compatibility
+    from urllib.parse import urljoin
+
 import os
 import pytest
 import pytest
@@ -130,7 +136,7 @@ def base_selenium(base_url, selenium, request):
         pass
     url = base_url
     if page:
-        url = urlparse.urljoin(base_url, page)
+        url = urljoin(base_url, page)
     selenium.get(url)
     sleep(10)
     return selenium

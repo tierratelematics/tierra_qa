@@ -22,5 +22,9 @@ def visit_example_page(base_selenium, page):
 @pytest_bdd.then(pytest_bdd.parsers.parse('I am on the {page} page'))
 def check_example_page_url(base_selenium, base_url, page):
     """ Check page url is corret """
-    import urlparse
-    assert base_selenium.current_url == urlparse.urljoin(base_url, page)
+    try:
+        from urlparse import urljoin
+    except ImportError:
+        # python3 compatibility
+        from urllib.parse import urljoin
+    assert base_selenium.current_url == urljoin(base_url, page)
