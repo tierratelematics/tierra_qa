@@ -118,8 +118,20 @@ def password(credentials_mapping, request):
         userid = request.getfuncargvalue('user')
     return credentials_mapping[userid]['password']
 
+@pytest.fixture(scope="session")
+def page_mappings():
+    """ Returns the page mappings, for example:
+
+            {'HomePage': '/', 'HelloPage': '/hello'}
+
+        This way your BDD tests won't refer to the
+        suburl that might change, you'll refer to page
+        labels instead.
+    """
+    return tierra_qa.config.PAGE_MAPPINGS
+
 @pytest.fixture
-def base_selenium(base_url, selenium, request):
+def base_selenium(base_url, selenium, request, page_mappings):
     """ Returns a selenium instance pointing to the base_url (not logged in).
         Optionally base_url + page if available.
     """
@@ -130,7 +142,7 @@ def base_selenium(base_url, selenium, request):
         pass
     url = base_url
     if page:
-        url = urlparse.urljoin(base_url, page)
+        url = urlparse.urljoin(base_url, page_mappings[page])
     selenium.get(url)
     sleep(10)
     return selenium
