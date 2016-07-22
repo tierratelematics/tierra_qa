@@ -125,7 +125,7 @@ def base_selenium(base_url, selenium, request):
     """
     page = None
     try:
-       page = request.getfuncargvalue('page')
+        page = request.getfuncargvalue('page')
     except python.FixtureLookupError:
         pass
     url = base_url
