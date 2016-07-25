@@ -144,7 +144,7 @@ def base_selenium(base_url, selenium, request, page_mappings):
     if page:
         url = urlparse.urljoin(base_url, page_mappings[page])
     selenium.get(url)
-    sleep(10)
+    sleep(2)
     return selenium
 
 @pytest.fixture
