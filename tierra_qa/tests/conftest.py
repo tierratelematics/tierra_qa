@@ -153,16 +153,5 @@ def loggedin_selenium(base_selenium, username, password):
         for a specific url (but you can override username and
         password fixtures using conftest.py inheritance acquisition).
     """
-#    # fill in username and password
-#    username_field = base_selenium.find_element_by_id('txtUsr')
-#    password_field = base_selenium.find_element_by_id('txtPwd')
-#
-#    username_field.send_keys(username)
-#    password_field.send_keys(password)
-#
-#    # submit
-#    submit_field = base_selenium.find_element_by_id('btnLogin')
-#    submit_field.click()
-#    sleep(3)
-#
+    # implement here your related login logics
     return base_selenium
