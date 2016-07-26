@@ -20,7 +20,7 @@ def visit_example_page(base_selenium, page):
 
 
 @pytest_bdd.then(pytest_bdd.parsers.parse('I am on the {page} page'))
-def check_example_page_url(base_selenium, base_url, page):
+def check_example_page_url(base_selenium, base_url, page, page_mappings):
     """ Check page url is corret """
     try:
         from urlparse import urljoin

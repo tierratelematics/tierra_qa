@@ -3,6 +3,6 @@ Feature: Subpage
 
     Scenario: Visit subpage
         # Given When I log in as Administrator
-        # And I visit the example page
-        Given I visit the example page
-        Then I am on the example page
+        # And I visit the HelloPage page
+        Given I visit the HelloPage page
+        Then I am on the HelloPage page

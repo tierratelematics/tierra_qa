@@ -28,7 +28,6 @@ setup(name='tierra_qa',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-          'pytest',
           'pytest-selenium',
           'pytest-bdd',
       ],

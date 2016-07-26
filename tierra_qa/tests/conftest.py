@@ -124,21 +124,33 @@ def password(credentials_mapping, request):
         userid = request.getfuncargvalue('user')
     return credentials_mapping[userid]['password']
 
+@pytest.fixture(scope="session")
+def page_mappings():
+    """ Returns the page mappings, for example:
+
+            {'HomePage': '/', 'HelloPage': '/hello'}
+
+        This way your BDD tests won't refer to the
+        suburl that might change, you'll refer to page
+        labels instead.
+    """
+    return tierra_qa.config.PAGE_MAPPINGS
+
 @pytest.fixture
-def base_selenium(base_url, selenium, request):
+def base_selenium(base_url, selenium, request, page_mappings):
     """ Returns a selenium instance pointing to the base_url (not logged in).
         Optionally base_url + page if available.
     """
     page = None
     try:
-       page = request.getfuncargvalue('page')
+        page = request.getfuncargvalue('page')
     except python.FixtureLookupError:
         pass
     url = base_url
     if page:
         url = urljoin(base_url, page)
     selenium.get(url)
-    sleep(10)
+    sleep(2)
     return selenium
 
 @pytest.fixture
@@ -147,16 +159,5 @@ def loggedin_selenium(base_selenium, username, password):
         for a specific url (but you can override username and
         password fixtures using conftest.py inheritance acquisition).
     """
-#    # fill in username and password
-#    username_field = base_selenium.find_element_by_id('txtUsr')
-#    password_field = base_selenium.find_element_by_id('txtPwd')
-#
-#    username_field.send_keys(username)
-#    password_field.send_keys(password)
-#
-#    # submit
-#    submit_field = base_selenium.find_element_by_id('btnLogin')
-#    submit_field.click()
-#    sleep(3)
-#
+    # implement here your related login logics
     return base_selenium
