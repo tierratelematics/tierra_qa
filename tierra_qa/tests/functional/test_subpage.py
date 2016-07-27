@@ -27,4 +27,5 @@ def check_example_page_url(base_selenium, base_url, page, page_mappings):
     except ImportError:
         # python3 compatibility
         from urllib.parse import urljoin
-    assert base_selenium.current_url == urljoin(base_url, page)
+    assert base_selenium.current_url == urljoin(base_url,
+                                                page_mappings[page])

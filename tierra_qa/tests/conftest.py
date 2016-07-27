@@ -148,7 +148,7 @@ def base_selenium(base_url, selenium, request, page_mappings):
         pass
     url = base_url
     if page:
-        url = urljoin(base_url, page)
+        url = urljoin(base_url, page_mappings[page])
     selenium.get(url)
     sleep(2)
     return selenium
