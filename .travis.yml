@@ -18,7 +18,7 @@ install:
   - python setup.py develop
   - python setup.py dev
 script:
-  - py.test --runslow --tb=native --cov=tierra_qa --cov-report=term-missing --driver Firefox --credentials="Administrator;admin;admin"
+  - py.test --runslow --tb=native --driver Firefox --credentials="Administrator;admin;admin"
 #after_success:
 #  - coveralls
 #  - codecov
