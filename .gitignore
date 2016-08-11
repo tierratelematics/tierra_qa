@@ -3,5 +3,7 @@
 *.pyc
 *.pyo
 *.swp
+*.log
+.eggs/
 python
 __pycache__

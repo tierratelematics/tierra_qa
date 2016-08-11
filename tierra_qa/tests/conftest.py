@@ -50,20 +50,30 @@ except ImportError:
 
 import os
 import pytest
-import pytest
 from _pytest import python
 from time import sleep
 import tierra_qa
 
 
+
 def pytest_addoption(parser):
-    """ Avoid passwords stored
-        inside the test code
-    """
-    parser.addoption("--credentials",
-                     action="store",
-                     default='',
-                     help="list of credentials with USERID1;USERNAME1;PASSWORD1|...")
+    # ``py.test --runslow`` causes the entire testsuite to be run, including test
+    # that are decorated with ``@@slow`` (scaffolding tests).
+    # see http://pytest.org/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option  # noqa
+    parser.addoption("--runslow", action="store_true", help="run slow tests")
+
+    # Avoid passwords stored inside the test code
+    parser.addoption(
+        "--credentials",
+        action="store",
+        default='',
+        help="list of credentials with USERID1;USERNAME1;PASSWORD1|...")
+
+
+def pytest_runtest_setup(item):
+    if 'slow' in item.keywords and not item.config.getoption("--runslow"):
+        pytest.skip("need --runslow option to run")
+
 
 @pytest.fixture
 def pytestbdd_feature_base_dir():

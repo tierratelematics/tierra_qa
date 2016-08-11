@@ -4,6 +4,17 @@ import os
 version = '0.0.1dev'
 
 
+install_requires = [
+    'pytest-selenium',
+    'pytest-bdd',
+]
+
+tests_require = [
+    'pytest-travis-fold',
+    'virtualenv', # needed for scaffolding tests
+]
+
+
 setup(name='tierra_qa',
       version=version,
       description="Tierra QA",
@@ -25,15 +36,14 @@ setup(name='tierra_qa',
       packages=find_packages(exclude=['ez_setup']),
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          'setuptools',
-          # -*- Extra requirements: -*-
-          'pytest-selenium',
-          'pytest-bdd',
-      ],
+      install_requires=install_requires,
+      tests_require=tests_require,
       entry_points="""
       # -*- Entry points: -*-
       [console_scripts]
       tierra_qa_clone = tierra_qa.scripts:tierra_qa_clone
       """,
+      extras_require={
+          'testing': tests_require,
+      },
       )
