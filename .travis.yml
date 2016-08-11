@@ -1,0 +1,24 @@
+language: python
+sudo: false
+addons:
+  firefox: "39.0"
+cache:
+  directories:
+    - $HOME/.cache/pip
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
+python:
+  - "2.7"
+  - "3.5"
+install:
+  - travis_retry pip install -U pip wheel setuptools
+  - travis_retry pip install python-coveralls codecov
+  - travis_retry pip install -e . -r requirements.txt
+  - pip uninstall -y tierra_qa
+  - python setup.py develop
+  - python setup.py dev
+script:
+  - py.test --runslow --tb=native --cov=tierra_qa --cov-report=term-missing --driver Firefox --credentials="Administrator;admin;admin"
+#after_success:
+#  - coveralls
+#  - codecov
