@@ -2,7 +2,7 @@ language: python
 sudo: false
 addons:
 #  firefox: "latest"
-  firefox: "47.0"
+  firefox: "46.0"
 cache:
   directories:
     - $HOME/.cache/pip
