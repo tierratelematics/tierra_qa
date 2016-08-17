@@ -1,8 +1,7 @@
 language: python
 sudo: false
 addons:
-#  firefox: "latest"
-  firefox: "45.0"
+  firefox: "latest"
 cache:
   directories:
     - $HOME/.cache/pip
@@ -11,13 +10,12 @@ before_cache:
 python:
   - "2.7"
   - "3.5"
-#before_install:
-#  - export PATH="$PATH:$HOME/.cargo/bin"
-#  - curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=stable
-#  - rustc -V
-#  - cargo -V
-#  - wget -O - https://raw.githubusercontent.com/mozilla/geckodriver/master/ci.sh | bash
 install:
+  - export PATH="$PATH:$HOME/.cargo/bin"
+  - curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=stable
+  - rustc -V
+  - cargo -V
+  - wget -O - https://raw.githubusercontent.com/mozilla/geckodriver/master/ci.sh | bash
   - travis_retry pip install -U pip wheel setuptools
 #  - travis_retry pip install python-coveralls codecov
   - travis_retry pip install -e . -r requirements.txt
