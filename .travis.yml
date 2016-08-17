@@ -14,8 +14,7 @@ matrix:
           packages:
           - musl-tools
           - libbz2-dev
-addons:
-  firefox: "latest"
+        firefox: "latest"
 cache:
   directories:
     - $HOME/.cache/pip
