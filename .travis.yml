@@ -1,5 +1,4 @@
 language: generic
-sudo: true
 
 addons:
   firefox: "latest"
