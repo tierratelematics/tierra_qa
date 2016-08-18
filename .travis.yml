@@ -23,6 +23,8 @@ matrix:
 
 before_install:
   - mkdir src
+  - mkdir src/tests
+  - wget  -O - https://raw.githubusercontent.com/mozilla/geckodriver/master/src/tests/profile.zip > src/tests/profile.zip
   - wget  -O - https://raw.githubusercontent.com/mozilla/geckodriver/master/src/main.rs > src/main.rs
   - wget  -O - https://raw.githubusercontent.com/mozilla/geckodriver/master/src/marionette.rs > src/marionette.rs
   - wget https://raw.githubusercontent.com/mozilla/geckodriver/master/Cargo.toml
