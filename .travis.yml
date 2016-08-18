@@ -1,5 +1,11 @@
-language: python
-sudo: false
+language: generic
+
+addons:
+  firefox: "latest"
+
+python:
+  - "2.7"
+
 matrix:
   include:
     - os: linux
@@ -14,28 +20,14 @@ matrix:
           packages:
           - musl-tools
           - libbz2-dev
-        firefox: "latest"
-      python:
-        - "2.7"
-#        - "3.5"
-#addons:
-#  firefox: "latest"
-cache:
-  directories:
-    - $HOME/.cache/pip
-before_cache:
-  - rm -f $HOME/.cache/pip/log/debug.log
+
 before_install:
-  - mkdir $HOME/.geckodriver
-  - export PATH="$PATH:$HOME/.geckodriver"
-  - wget -O - https://github.com/mozilla/geckodriver/releases/download/v0.10.0/geckodriver-v0.10.0-linux64.tar.gz | tar xvzf -
-  - mv geckodriver $HOME/.geckodriver
-#before_install:
-#  - export PATH="$PATH:$HOME/.cargo/bin"
-#  - curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=stable
-#  - rustc -V
-#  - cargo -V
-#  - wget -O - https://raw.githubusercontent.com/mozilla/geckodriver/master/ci.sh | bash
+  - export PATH="$PATH:$HOME/.cargo/bin"
+  - curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=stable
+  - rustc -V
+  - cargo -V
+  - wget -O - https://raw.githubusercontent.com/mozilla/geckodriver/master/ci.sh | bash
+
 install:
   - travis_retry pip install -U pip wheel setuptools
 #  - travis_retry pip install python-coveralls codecov
@@ -43,8 +35,6 @@ install:
   - pip uninstall -y tierra_qa
   - python setup.py develop
   - python setup.py dev
+
 script:
   - py.test --runslow --tb=native --driver Firefox --credentials="Administrator;admin;admin"
-#after_success:
-#  - coveralls
-#  - codecov
