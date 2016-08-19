@@ -1,0 +1,30 @@
+language: python
+sudo: false
+
+addons:
+  firefox: "latest"
+
+python:
+  - "2.7"
+
+before_install:
+  - wget -O - https://github.com/mozilla/geckodriver/releases/download/v0.10.0/geckodriver-v0.10.0-linux64.tar.gz | tar xvzf -
+  - mkdir bin
+  - mv geckodriver bin
+  - export PATH="$PATH:`pwd`/bin"
+
+install:
+  - travis_retry pip install -U pip wheel setuptools
+#  - travis_retry pip install python-coveralls codecov
+  - travis_retry pip install -e . -r requirements.txt
+  - pip uninstall -y tierra_qa
+  - python setup.py develop
+  - python setup.py dev
+
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+
+script:
+  - py.test --runslow --tb=native --driver Firefox --credentials="Administrator;admin;admin"
