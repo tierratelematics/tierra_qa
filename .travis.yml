@@ -1,4 +1,5 @@
-language: generic
+language: python
+sudo: false
 
 addons:
   firefox: "latest"
@@ -6,31 +7,11 @@ addons:
 python:
   - "2.7"
 
-matrix:
-  include:
-    - os: linux
-      env:
-        - TARGET=x86_64-unknown-linux-musl
-        - NAME=linux64
-        - EXT=tar.gz
-      dist: trusty
-      sudo: required
-      addons:
-        apt:
-          packages:
-          - musl-tools
-          - libbz2-dev
-
 before_install:
-  - git clone https://github.com/mozilla/geckodriver.git
-  - ln -s geckodriver/src src
-  - ln -s geckodriver/Cargo.toml Cargo.toml
-  - ln -s geckodriver/Cargo.lock Cargo.lock
-  - export PATH="$PATH:$HOME/.cargo/bin"
-  - curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=stable
-  - rustc -V
-  - cargo -V
-  - wget -O - https://raw.githubusercontent.com/mozilla/geckodriver/master/ci.sh | bash
+  - wget -O - https://github.com/mozilla/geckodriver/releases/download/v0.10.0/geckodriver-v0.10.0-linux64.tar.gz | tar xvzf -
+  - mkdir bin
+  - mv geckodriver bin
+  - export PATH="$PATH:`pwd`/bin"
 
 install:
   - travis_retry pip install -U pip wheel setuptools
