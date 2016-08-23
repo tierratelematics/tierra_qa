@@ -147,7 +147,7 @@ def page_mappings():
     return tierra_qa.config.PAGE_MAPPINGS
 
 @pytest.fixture
-def base_selenium(base_url, selenium, request, page_mappings):
+def base_browser(base_url, browser, request, page_mappings):
     """ Returns a selenium instance pointing to the base_url (not logged in).
         Optionally base_url + page if available.
     """
@@ -159,15 +159,21 @@ def base_selenium(base_url, selenium, request, page_mappings):
     url = base_url
     if page:
         url = urljoin(base_url, page_mappings[page])
-    selenium.get(url)
+    browser.visit(url)
     sleep(2)
-    return selenium
+    return browser
 
 @pytest.fixture
-def loggedin_selenium(base_selenium, username, password):
+def loggedin_browser(base_browser, username, password):
     """ Returns a logged in selenium session on the marked user
         for a specific url (but you can override username and
         password fixtures using conftest.py inheritance acquisition).
     """
     # implement here your related login logics
-    return base_selenium
+    return base_browser
+
+@pytest.fixture(scope="session")
+def splinter_screenshot_dir():
+    """Feature files base directory."""
+    return os.path.join(os.path.dirname(tierra_qa.__file__), 'screenshots')
+
