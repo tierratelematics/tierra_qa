@@ -50,7 +50,7 @@ How to use it
 
 Once installed you can launch tests with:
 
-    $ py.test --driver Firefox [--base-url http://anotherurl.com/] --credentials="USERID1;USERNAME1;PASSWORD1|..."
+    $ py.test --splinter-webdriver=firefox [--base-url http://anotherurl.com/] --credentials="USERID1;USERNAME1;PASSWORD1|..."
 
 With the ``--credentials`` parameter you can specify different multiple user credentials splitted by a | character where:
 
@@ -64,7 +64,7 @@ The USERID1 will be used in order to mark tests if you want an authenticated ses
 
     @pytest.mark.user('USERID1')
     @pytest.mark.nondestructive
-    def test_login(loggedin_selenium):
+    def test_login(loggedin_browser):
         # you'll have a selenium session authenticated with the USERID1
         assert 1
 
