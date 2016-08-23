@@ -100,7 +100,6 @@ def credentials_mapping(request):
             import pytest
 
             @pytest.mark.user('USERID1')
-            @pytest.mark.nondestructive
             def test_login(loggedin_selenium):
                 # you'll have a selenium session authenticated with the USERID1
                 assert 1

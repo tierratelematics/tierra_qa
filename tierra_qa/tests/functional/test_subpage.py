@@ -2,13 +2,11 @@
 """Login feature tests."""
 
 from functools import partial
-import pytest
 import pytest_bdd
 
 scenario = partial(pytest_bdd.scenario, "functional/subpage.feature")
 
 
-@pytest.mark.nondestructive
 @scenario("Visit subpage")
 def test_visit_subpage():
     """Login."""
@@ -27,6 +25,5 @@ def check_example_page_url(base_browser, base_url, page, page_mappings):
     except ImportError:
         # python3 compatibility
         from urllib.parse import urljoin
-    #import pdb
-    #pdb.set_trace()
-    assert base_browser.url == urljoin(base_url,page_mappings[page])
+
+    assert base_browser.url == urljoin(base_url, page_mappings[page])

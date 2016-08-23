@@ -2,14 +2,12 @@
 """Login feature tests."""
 
 from functools import partial
-import pytest
 import pytest_bdd
 
 
 scenario = partial(pytest_bdd.scenario, "functional/login.feature")
 
 
-@pytest.mark.nondestructive
 @scenario("Successful login")
 def test_successfull_login():
     """Login."""
