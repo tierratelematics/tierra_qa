@@ -38,7 +38,7 @@ Prerequisites:
 
 * python-dev
 * virtualenv
-* Firefox, Chrome, etc
+* Firefox (requires geckodriver), Chrome, etc
 
 Clone the ``tierra_qa`` package and run:
 
