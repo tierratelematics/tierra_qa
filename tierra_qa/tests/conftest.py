@@ -50,7 +50,11 @@ except ImportError:
 
 import os
 import pytest
-from _pytest import python
+try:
+    from _pytest.fixtures import FixtureLookupError
+except ImportError:
+    from _pytest.python import FixtureLookupError
+
 from time import sleep
 import tierra_qa
 
@@ -153,7 +157,7 @@ def base_browser(base_url, browser, request, page_mappings):
     page = None
     try:
         page = request.getfuncargvalue('page')
-    except python.FixtureLookupError:
+    except FixtureLookupError:
         pass
     url = base_url
     if page:
