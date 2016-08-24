@@ -14,5 +14,4 @@ requests==2.11.1
 selenium==3.0.0b2
 six==1.10.0
 splinter==0.7.4
--e git+git@github.com:tierratelematics/tierra_qa.git@3d5cfd6b082b4facb16a124e7b19c70fd8c1d1f8#egg=tierra_qa
 virtualenv==15.0.3
