@@ -4,13 +4,16 @@ Mako==1.0.4
 MarkupSafe==0.23
 parse==1.6.6
 parse-type==0.3.4
+pkg-resources==0.0.0
 py==1.4.31
-pytest==2.9.2
+pytest==3.0.1
 pytest-base-url==1.1.0
-pytest-bdd==2.17.0
-pytest-html==1.10.0
-pytest-selenium==1.3.1
-pytest-variables==1.4
-requests==2.11.0
+pytest-bdd==2.17.1
+pytest-splinter==1.7.6
+pytest-travis-fold==1.2.0
+requests==2.11.1
 selenium==3.0.0b2
 six==1.10.0
+splinter==0.7.4
+-e git+git@github.com:tierratelematics/tierra_qa.git@3d5cfd6b082b4facb16a124e7b19c70fd8c1d1f8#egg=tierra_qa
+virtualenv==15.0.3
