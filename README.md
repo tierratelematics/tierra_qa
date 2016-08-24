@@ -8,9 +8,8 @@ black box QA testing applied to any web application.
 
 It is internally based on:
 * py.test
-* pytest-selenium
+* pytest-splinter
 * pytest-bdd
-* optionally on pytest-docker (TODO)
 
 In the next future we'll provide a generic package generator for easy setup of
 testing.
