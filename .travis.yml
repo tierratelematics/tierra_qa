@@ -27,4 +27,4 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-  - py.test --runslow --tb=native --splinter-webdriver=firefox --credentials="Administrator;admin;admin" --splinter-session-scoped-browser=false
+  - py.test --runslow --tb=native --splinter-webdriver=firefox --credentials="Administrator;admin;admin"
