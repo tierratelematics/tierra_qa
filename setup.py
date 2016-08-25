@@ -11,7 +11,7 @@ install_requires = [
 ]
 
 tests_require = [
-#    'pytest-travis-fold',
+    'pytest-travis-fold',
     'virtualenv', # needed for scaffolding tests
 ]
 
