@@ -6,6 +6,12 @@ addons:
 
 python:
   - "2.7"
+  
+cache:
+  directories:
+    # /home/travis/.cache/pip/wheels is the normal pip cache folder
+    - $HOME/.cache/pip
+#    - .tox
 
 before_install:
   - wget -O - https://github.com/mozilla/geckodriver/releases/download/v0.10.0/geckodriver-v0.10.0-linux64.tar.gz | tar xvzf -
