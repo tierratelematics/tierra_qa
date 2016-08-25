@@ -16,8 +16,9 @@ before_install:
 install:
   - travis_retry pip install -U pip wheel setuptools
 #  - travis_retry pip install python-coveralls codecov
-  - travis_retry pip install -e . -r requirements.txt
-  - pip uninstall -y tierra_qa
+  - travis_retry pip install -r requirements.txt
+#  - travis_retry pip install -e . -r requirements.txt
+#  - pip uninstall -y tierra_qa
   - python setup.py develop
   - python setup.py dev
 
