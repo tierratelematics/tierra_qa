@@ -113,5 +113,5 @@ def test_scaffold_tierra_qa(virtualenv, travis):
         # run the tests
         subprocess.check_call([
             os.path.join('..', 'bin', 'py.test'),
-            '--splinter-webdriver', 'firefox', '--credentials',
+            '--splinter-webdriver', 'phantomjs', '--credentials',
             'Administrator;admin;admin'])
