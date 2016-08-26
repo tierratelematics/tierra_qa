@@ -1,0 +1,4 @@
+include *.md
+include *.txt
+recursive-include docs *.txt
+recursive-include tierra_qa *.feature
