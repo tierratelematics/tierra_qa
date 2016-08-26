@@ -5,8 +5,9 @@ version = '0.0.1dev'
 
 
 install_requires = [
-    'pytest-selenium',
     'pytest-bdd',
+    'pytest-splinter',
+    'pytest-base-url'
 ]
 
 tests_require = [

@@ -27,7 +27,6 @@ from pytest import fixture
 from pytest import mark
 
 slow = mark.slow
-nondestructive = mark.nondestructive
 
 
 @fixture
@@ -95,7 +94,6 @@ def virtualenv(request, travis):
     request.addfinalizer(delete_virtualenv)
 
 
-@nondestructive
 @slow
 def test_scaffold_tierra_qa(virtualenv, travis):
 
@@ -115,5 +113,5 @@ def test_scaffold_tierra_qa(virtualenv, travis):
         # run the tests
         subprocess.check_call([
             os.path.join('..', 'bin', 'py.test'),
-            '--driver', 'Firefox', '--credentials',
+            '--splinter-webdriver', 'phantomjs', '--credentials',
             'Administrator;admin;admin'])

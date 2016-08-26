@@ -7,3 +7,6 @@
 .eggs/
 python
 __pycache__
+bin/*
+.idea/*
+tierra_qa/screenshots/*
