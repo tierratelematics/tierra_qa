@@ -4,6 +4,7 @@
 *.pyo
 *.swp
 *.log
+.tox
 .eggs/
 python
 __pycache__
