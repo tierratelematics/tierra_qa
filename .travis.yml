@@ -1,32 +1,27 @@
 language: python
 sudo: false
 
-#addons:
-#  firefox: "latest"
-
 python:
   - "2.7"
+#  - "3.5"
+
+env:
+  - DRIVER=phantomjs
+#  - DRIVER=firefox
+#  - DRIVER=chrome
   
 cache:
   directories:
     # /home/travis/.cache/pip/wheels is the normal pip cache folder
     - $HOME/.cache/pip
-#    - .tox
+    - .tox
 
 before_install:
-  - mkdir bin
-  - export PATH="$PATH:`pwd`/bin"
-#  - wget -O - https://github.com/mozilla/geckodriver/releases/download/v0.10.0/geckodriver-v0.10.0-linux64.tar.gz | tar xvzf -
-#  - mv geckodriver bin
-  - wget -O - https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar -xj
-  - mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs bin
+  - ./scripts/setup_travis.sh
 
 install:
   - travis_retry pip install -U pip wheel setuptools
-#  - travis_retry pip install python-coveralls codecov
   - travis_retry pip install -r requirements.txt
-#  - travis_retry pip install -e . -r requirements.txt
-#  - pip uninstall -y tierra_qa
   - python setup.py develop
   - python setup.py dev
 
@@ -36,4 +31,5 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-  - py.test --runslow --tb=native --splinter-webdriver=phantomjs --credentials="Administrator;admin;admin"
+  - tox -e ${DRIVER}
+  # - py.test --runslow --tb=native --splinter-webdriver=phantomjs --credentials="Administrator;admin;admin"

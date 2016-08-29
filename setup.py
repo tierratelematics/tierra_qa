@@ -11,8 +11,9 @@ install_requires = [
 ]
 
 tests_require = [
+    'tox',
     'pytest-travis-fold',
-    'virtualenv', # needed for scaffolding tests
+    'virtualenv',  # needed for scaffolding tests
 ]
 
 
@@ -20,15 +21,15 @@ setup(name='tierra_qa',
       version=version,
       description="Tierra QA",
       long_description=open("README.md").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        "Programming Language :: Python",
-        "Framework :: Pytest",
-        "Topic :: Software Development :: Testing",
-        "License :: OSI Approved :: Apache Software License",
-        ],
+          "Programming Language :: Python",
+          "Framework :: Pytest",
+          "Topic :: Software Development :: Testing",
+          "License :: OSI Approved :: Apache Software License",
+          ],
       keywords='',
       author='Tierra QA Team',
       author_email='DLQA@tierratelematics.com',

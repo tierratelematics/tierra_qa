@@ -4,6 +4,7 @@ Mako==1.0.4
 MarkupSafe==0.23
 parse==1.6.6
 parse-type==0.3.4
+pluggy==0.3.1
 py==1.4.31
 pytest==3.0.1
 pytest-base-url==1.1.0
@@ -14,4 +15,5 @@ requests==2.11.1
 selenium==3.0.0b2
 six==1.10.0
 splinter==0.7.4
+tox==2.3.1
 virtualenv==15.0.3
