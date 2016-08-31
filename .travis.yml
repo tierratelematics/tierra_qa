@@ -16,10 +16,8 @@ cache:
     - $HOME/.cache/pip
     - .tox
 
-before_install:
-  - ./scripts/setup_travis.sh
-
 install:
+  - ./scripts/setup_travis.sh
   - travis_retry pip install -U pip wheel setuptools
   - travis_retry pip install -r requirements.txt
   - python setup.py develop
@@ -31,4 +29,3 @@ before_script:
 
 script:
   - tox -e ${DRIVER}
-  # - py.test --runslow --tb=native --splinter-webdriver=phantomjs --credentials="Administrator;admin;admin"
