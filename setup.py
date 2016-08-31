@@ -7,10 +7,7 @@ version = '0.0.1dev'
 install_requires = [
     'pytest-bdd',
     'pytest-splinter',
-    'pytest-base-url'
-]
-
-tests_require = [
+    'pytest-base-url',
     'tox',
     'pytest-travis-fold',
     'virtualenv',  # needed for scaffolding tests
@@ -39,13 +36,9 @@ setup(name='tierra_qa',
       include_package_data=True,
       zip_safe=False,
       install_requires=install_requires,
-      tests_require=tests_require,
       entry_points="""
       # -*- Entry points: -*-
       [console_scripts]
       tierra_qa_clone = tierra_qa.scripts:tierra_qa_clone
       """,
-      extras_require={
-          'testing': tests_require,
-      },
       )
