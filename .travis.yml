@@ -27,5 +27,6 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
+  - export PATH="$PATH:`pwd`/bin"
   - ./scripts/setup_travis.sh
   - tox -e ${DRIVER}
