@@ -23,7 +23,6 @@ install:
   - travis_retry pip install -U pip wheel setuptools
   - travis_retry pip install -r requirements.txt
   - python setup.py develop
-  - python setup.py dev
 
 before_script:
   - "export DISPLAY=:99.0"
