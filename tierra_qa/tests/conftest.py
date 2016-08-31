@@ -180,3 +180,9 @@ def splinter_screenshot_dir():
     """Feature files base directory."""
     return os.path.join(os.path.dirname(tierra_qa.__file__), 'screenshots')
 
+@pytest.fixture(scope='session')
+def splinter_driver_kwargs(splinter_webdriver):
+    """Webdriver kwargs."""
+    if splinter_webdriver == 'firefox':
+        return {'capabilities':{'marionette':True}}
+    return {}
