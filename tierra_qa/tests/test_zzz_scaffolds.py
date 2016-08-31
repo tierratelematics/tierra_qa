@@ -95,7 +95,7 @@ def virtualenv(request, travis):
 
 
 @slow
-def test_scaffold_tierra_qa(virtualenv, travis):
+def test_scaffold_tierra_qa(virtualenv, travis, splinter_webdriver):
 
     with travis.folding_output():
 
@@ -113,5 +113,5 @@ def test_scaffold_tierra_qa(virtualenv, travis):
         # run the tests
         subprocess.check_call([
             os.path.join('..', 'bin', 'py.test'),
-            '--splinter-webdriver', 'phantomjs', '--credentials',
+            '--splinter-webdriver', splinter_webdriver, '--credentials',
             'Administrator;admin;admin'])
