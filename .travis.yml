@@ -7,7 +7,7 @@ python:
 
 env:
   - DRIVER=phantomjs
-#  - DRIVER=firefox
+  - DRIVER=firefox
 #  - DRIVER=chrome
   
 cache:
