@@ -17,7 +17,6 @@ cache:
     - .tox
 
 install:
-  - ./scripts/setup_travis.sh
   - travis_retry pip install -U pip wheel setuptools
   - travis_retry pip install -r requirements.txt
   - python setup.py develop
@@ -28,4 +27,5 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
+  - ./scripts/setup_travis.sh
   - tox -e ${DRIVER}
