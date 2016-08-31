@@ -3,12 +3,18 @@ sudo: false
 
 python:
   - "2.7"
-#  - "3.5"
+  - "3.5"
 
 env:
   - DRIVER=phantomjs
   - DRIVER=firefox
-#  - DRIVER=chrome
+  - DRIVER=chrome
+
+matrix:
+  allow_failures:
+    - env: DRIVER=firefox
+    - env: DRIVER=chrome
+    - python: "3.5"
   
 cache:
   directories:
