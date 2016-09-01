@@ -2,6 +2,7 @@ tierra_qa
 =========
 
 [![Build Status](https://travis-ci.org/tierratelematics/tierra_qa.svg?branch=master)](https://travis-ci.org/tierratelematics/tierra_qa)
+[![Requirements Status](https://requires.io/github/tierratelematics/tierra_qa/requirements.svg?branch=master)](https://requires.io/github/tierratelematics/tierra_qa/requirements/?branch=master)
 
 ``tierra_qa`` is a package that aims to find a new repeatable pattern for 
 black box QA testing applied to any web application.
