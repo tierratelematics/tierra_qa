@@ -68,7 +68,6 @@ The USERID1 will be used in order to mark tests if you want an authenticated ses
 
 By default the default ``base_url`` is http://tierratelematics.com/ and it
 is specified on ``setup.cfg`` file.
-If you provide multiple ``--base-url`` parameters your test suite will be automatically repeated against different environments (using same
 credentials).
 
 How to create your own qa package
