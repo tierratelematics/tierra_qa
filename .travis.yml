@@ -6,9 +6,9 @@ python:
   - "3.5"
 
 env:
-  - DRIVER=phantomjs
+#  - DRIVER=phantomjs
   - DRIVER=firefox
-  - DRIVER=chrome
+#  - DRIVER=chrome
 
 matrix:
   allow_failures:
@@ -33,6 +33,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
+  - firefox --version
   - export PATH="$PATH:`pwd`/bin"
   - ./scripts/setup_travis.sh
   - tox -e ${DRIVER}
