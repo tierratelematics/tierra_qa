@@ -84,6 +84,7 @@ def username(credentials_mapping, request):
         userid = request.getfuncargvalue('user')
     return credentials_mapping[userid]['username']
 
+
 @pytest.fixture
 def password(credentials_mapping, request):
     """ Returns the real (overridable) password associated to the user marker or fixture """
@@ -92,6 +93,7 @@ def password(credentials_mapping, request):
     else:
         userid = request.getfuncargvalue('user')
     return credentials_mapping[userid]['password']
+
 
 @pytest.fixture(scope="session")
 def page_mappings():
@@ -104,6 +106,7 @@ def page_mappings():
         labels instead.
     """
     return tierra_qa.config.PAGE_MAPPINGS
+
 
 @pytest.fixture
 def base_browser(base_url, browser, request, page_mappings):
@@ -122,6 +125,7 @@ def base_browser(base_url, browser, request, page_mappings):
     sleep(2)
     return browser
 
+
 @pytest.fixture
 def loggedin_browser(base_browser, username, password):
     """ Returns a logged in selenium session on the marked user
@@ -131,10 +135,12 @@ def loggedin_browser(base_browser, username, password):
     # implement here your related login logics
     return base_browser
 
+
 @pytest.fixture(scope="session")
 def splinter_screenshot_dir():
     """Feature files base directory."""
     return os.path.join(os.path.dirname(tierra_qa.__file__), 'screenshots')
+
 
 @pytest.fixture(scope='session')
 def splinter_driver_kwargs(splinter_webdriver):
