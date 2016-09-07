@@ -15,10 +15,9 @@ from time import sleep
 import tierra_qa
 
 
-
 def pytest_addoption(parser):
-    # ``py.test --runslow`` causes the entire testsuite to be run, including test
-    # that are decorated with ``@@slow`` (scaffolding tests).
+    # ``py.test --runslow`` causes the entire testsuite to be run, including
+    # test that are decorated with ``@@slow`` (scaffolding tests).
     # see http://pytest.org/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option  # noqa
     parser.addoption("--runslow", action="store_true", help="run slow tests")
 
@@ -43,10 +42,11 @@ def pytestbdd_feature_base_dir():
 
 @pytest.fixture(scope='session')
 def credentials_mapping(request):
-    """ 
+    """
         This fixture provides a mapping of easy to remember user identifiers
         with usernames depending on the --credentials parameter with
-        with USERID1;USERNAME1;PASSWORD1|... format and returns something like that::
+        with USERID1;USERNAME1;PASSWORD1|... format and returns something
+        like that::
 
             {
                 'USERID1': {'username':'USERNAME1', 'password': 'PASSWORD1'},
@@ -77,7 +77,8 @@ def credentials_mapping(request):
 
 @pytest.fixture
 def username(credentials_mapping, request):
-    """ Returns the real (overridable) username associated to the user marker or fixture """
+    """ Returns the real (overridable) username associated to the user
+         marker or fixture """
     if 'user' in request.keywords:
         userid = request.keywords['user'].args[0]
     else:
@@ -87,7 +88,8 @@ def username(credentials_mapping, request):
 
 @pytest.fixture
 def password(credentials_mapping, request):
-    """ Returns the real (overridable) password associated to the user marker or fixture """
+    """ Returns the real (overridable) password associated to the user
+        marker or fixture """
     if 'user' in request.keywords:
         userid = request.keywords['user'].args[0]
     else:
@@ -146,5 +148,5 @@ def splinter_screenshot_dir():
 def splinter_driver_kwargs(splinter_webdriver):
     """Webdriver kwargs."""
     if splinter_webdriver == 'firefox':
-        return {'capabilities':{'marionette':True}}
+        return {'capabilities': {'marionette': True}}
     return {}
