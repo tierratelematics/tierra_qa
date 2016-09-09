@@ -50,9 +50,13 @@ How to use it
 
 Once installed you can launch tests with:
 
-    $ py.test --splinter-webdriver=firefox [--base-url http://anotherurl.com/] --credentials="USERID1;USERNAME1;PASSWORD1|..."
+    $ py.test --splinter-webdriver=firefox [--base-url http://anotherurl.com/] --variables credentials_template.yml
 
-With the ``--credentials`` parameter you can specify different multiple user credentials splitted by a | character where:
+With the ``--variables`` parameter you can read user credentials from a YAML file like that::
+
+  { "credentials": { 'USERID1': {'username':'USERNAME1', 'password': 'PASSWORD1'}, }}
+
+where:
 
 * USERID1, stands for the user identifier used in test cases
 * USERNAME1, stands for the username used for login
@@ -68,8 +72,7 @@ The USERID1 will be used in order to mark tests if you want an authenticated ses
         assert 1
 
 By default the default ``base_url`` is http://tierratelematics.com/ and it
-is specified on ``setup.cfg`` file.
-credentials).
+is specified on ``setup.cfg`` file).
 
 How to create your own qa package
 =================================

@@ -21,13 +21,6 @@ def pytest_addoption(parser):
     # see http://pytest.org/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option  # noqa
     parser.addoption("--runslow", action="store_true", help="run slow tests")
 
-    # Avoid passwords stored inside the test code
-    parser.addoption(
-        "--credentials",
-        action="store",
-        default='',
-        help="list of credentials with USERID1;USERNAME1;PASSWORD1|...")
-
 
 def pytest_runtest_setup(item):
     if 'slow' in item.keywords and not item.config.getoption("--runslow"):
@@ -41,12 +34,10 @@ def pytestbdd_feature_base_dir():
 
 
 @pytest.fixture(scope='session')
-def credentials_mapping(request):
+def credentials_mapping(request, variables):
     """
-        This fixture provides a mapping of easy to remember user identifiers
-        with usernames depending on the --credentials parameter with
-        with USERID1;USERNAME1;PASSWORD1|... format and returns something
-        like that::
+       This fixture provide users credentials via a file specified on the
+       --variables option.The format returned is something like that::
 
             {
                 'USERID1': {'username':'USERNAME1', 'password': 'PASSWORD1'},
@@ -65,20 +56,15 @@ def credentials_mapping(request):
                 assert 1
 
     """
-    credentials = {}
-    raw_credentials = request.config.getoption('--credentials')
 
-    for users_info in raw_credentials.split('|'):
-        userid, username, password = users_info.split(';', 3)
-        credentials[userid] = {'username': username, 'password': password}
-
-    return credentials
+    return variables['credentials']
 
 
 @pytest.fixture
 def username(credentials_mapping, request):
     """ Returns the real (overridable) username associated to the user
          marker or fixture """
+
     if 'user' in request.keywords:
         userid = request.keywords['user'].args[0]
     else:
