@@ -1,5 +1,7 @@
 include *.md
 include *.ini
 include *.txt
+include *.yml
+include *.json
 recursive-include docs *.txt
 recursive-include tierra_qa *.feature
