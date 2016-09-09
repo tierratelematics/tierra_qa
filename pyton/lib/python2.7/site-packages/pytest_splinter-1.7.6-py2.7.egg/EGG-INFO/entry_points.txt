@@ -1,0 +1,3 @@
+[pytest11]
+pytest-splinter = pytest_splinter.plugin
+

@@ -1,0 +1,12 @@
+#!/home/serena/tierra_qa/pyton/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'tierra-qa','console_scripts','tierra_qa_clone'
+__requires__ = 'tierra-qa'
+import re
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(
+        load_entry_point('tierra-qa', 'console_scripts', 'tierra_qa_clone')()
+    )
