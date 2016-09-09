@@ -11,7 +11,6 @@ install_requires = [
     'tox',
     'pytest-travis-fold',
     'virtualenv',  # needed for scaffolding tests
-    'pytest-variables',
     'pytest-variables[yaml]',
 ]
 
