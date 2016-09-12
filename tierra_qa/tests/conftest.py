@@ -36,24 +36,19 @@ def pytestbdd_feature_base_dir():
 @pytest.fixture(scope='session')
 def credentials_mapping(request, variables):
     """
-       This fixture provide users credentials via a file specified on the
-       --variables option.The format returned is something like that::
+       This fixture provides users credentials via a file specified on the
+       --variables option.The file format is one supported by pytest-variables.
 
-            {
-                'USERID1': {'username':'USERNAME1', 'password': 'PASSWORD1'},
-                'USERID2': {'username':'USERNAME2', 'password': 'PASSWORD2'},
-            }
+       On the test side you just have to add a marker where you specify
+       the user identifier you want to operate with.
 
-        On the test side you just have to add a marker where you specify the
-        user identifier you want to operate with.
+       For example::
+         import pytest
 
-        For example::
-            import pytest
-
-            @pytest.mark.user('USERID1')
-            def test_login(loggedin_selenium):
-                # you'll have a selenium session authenticated with the USERID1
-                assert 1
+         @pytest.mark.user('USERID1')
+         def test_login(loggedin_selenium):
+           # you'll have a selenium session authenticated with the USERID1
+           assert 1
 
     """
 
