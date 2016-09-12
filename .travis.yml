@@ -19,11 +19,11 @@ matrix:
     - env: DRIVER=chrome
     - python: "3.5"
   
-cache:
-  directories:
-    # /home/travis/.cache/pip/wheels is the normal pip cache folder
-    - $HOME/.cache/pip
-    - .tox
+#cache:
+#  directories:
+#    # /home/travis/.cache/pip/wheels is the normal pip cache folder
+#    - $HOME/.cache/pip
+#    - .tox
 
 install:
   - travis_retry pip install -U pip wheel setuptools
