@@ -54,7 +54,10 @@ Once installed you can launch tests with:
 
 With the ``--variables`` parameter you can read user credentials from a YAML file like that::
 
-   { "credentials": { 'USERID1': {'username':'USERNAME1', 'password': 'PASSWORD1'}, }}
+   credentials:
+     USERID:
+       username: USERNAME1
+       password: PASSWORD1
 
 where:
 
@@ -70,6 +73,9 @@ The USERID1 will be used in order to mark tests if you want an authenticated ses
     def test_login(loggedin_browser):
         # you'll have a selenium session authenticated with the USERID1
         assert 1
+
+The YAML file 'credentials_template.yml' has to be considered only a template for credentials.
+The file containing the credentials should not be versioned.
 
 By default the default ``base_url`` is http://tierratelematics.com/ and it
 is specified on ``setup.cfg`` file).
