@@ -26,4 +26,5 @@ def check_example_page_url(page, base_url, page_id, page_mappings):
         # python3 compatibility
         from urllib.parse import urljoin
 
-    assert page.driver.url == urljoin(base_url, page_mappings[page_id]['path'])
+    assert page.current_url == urljoin(base_url,
+                                       page_mappings[page_id]['path'])
