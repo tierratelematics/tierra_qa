@@ -11,9 +11,7 @@ It is internally based on:
 * py.test
 * pytest-splinter
 * pytest-bdd
-
-In the next future we'll provide a generic package generator for easy setup of
-testing.
+* PyPOM
 
 Why py.test
 -----------
@@ -55,7 +53,7 @@ Once installed you can launch tests with:
 With the ``--variables`` parameter you can read user credentials from a YAML file like that:
 ```
    credentials:
-     USERID:
+     USERID1:
        username: USERNAME1
        password: PASSWORD1
 ```
@@ -66,24 +64,16 @@ where:
 * USERNAME1, stands for the username used for login
 * PASSWORD1, password associated to the above username
 
-The USERID1 will be used in order to mark tests if you want an authenticated session, for example::
+The YAML file 'credentials_template.yml' has to be considered only a template for credentials and we
+*stronlgy* suggest to do not put credential files under version control.
 
-    import pytest
-
-    @pytest.mark.user_id('USERID1')
-    def test_login(loggedin_browser):
-        # you'll have a selenium session authenticated with the USERID1
-        assert 1
-
-The YAML file 'credentials_template.yml' has to be considered only a template for credentials.
-The file containing the credentials should not be versioned.
-
-By default the default ``base_url`` is http://tierratelematics.com/ and it
-is specified on ``setup.cfg`` file).
+By default the default ``base_url`` is http://tierratelematics.com/ and you can change it editing the
+``setup.cfg`` file.
 
 How to create your own qa package
 =================================
 
 Once you have installed ``tierra_qa`` you can create your own package typing the following command:
-
-* tierra_qa_clone YOURPACKAGE_QA
+```
+    $ tierra_qa_clone YOURPACKAGE_QA
+```
