@@ -11,7 +11,6 @@ try:
 except ImportError:
     from _pytest.python import FixtureLookupError
 
-from time import sleep
 import tierra_qa
 
 
@@ -63,8 +62,11 @@ def username(credentials_mapping, request):
     if 'user' in request.keywords:
         userid = request.keywords['user'].args[0]
     else:
-        userid = request.getfuncargvalue('user')
-    return credentials_mapping[userid]['username']
+        try:
+            userid = request.getfuncargvalue('user')
+        except FixtureLookupError:
+            userid = None
+    return userid and credentials_mapping[userid]['username'] or None
 
 
 @pytest.fixture
@@ -74,49 +76,60 @@ def password(credentials_mapping, request):
     if 'user' in request.keywords:
         userid = request.keywords['user'].args[0]
     else:
-        userid = request.getfuncargvalue('user')
-    return credentials_mapping[userid]['password']
+        try:
+            userid = request.getfuncargvalue('user')
+        except FixtureLookupError:
+            userid = None
+    return userid and credentials_mapping[userid]['password'] or None
 
 
 @pytest.fixture(scope="session")
 def page_mappings():
-    """ Returns the page mappings, for example:
+    """ Returns the page mappings for paths and page object
+        classes.
 
-            {'HomePage': '/', 'HelloPage': '/hello'}
-
-        This way your BDD tests won't refer to the
-        suburl that might change, you'll refer to page
-        labels instead.
+        See tierra_qa.config.PAGE_MAPPINGS for further details.
     """
     return tierra_qa.config.PAGE_MAPPINGS
 
 
 @pytest.fixture
-def base_browser(base_url, browser, request, page_mappings):
-    """ Returns a selenium instance pointing to the base_url (not logged in).
-        Optionally base_url + page if available.
-    """
-    page = None
-    try:
-        page = request.getfuncargvalue('page')
-    except FixtureLookupError:
-        pass
-    url = base_url
-    if page:
-        url = urljoin(base_url, page_mappings[page])
-    browser.visit(url)
-    sleep(2)
-    return browser
+def default_page_class():
+    return tierra_qa.pages.BasePage
 
 
 @pytest.fixture
-def loggedin_browser(base_browser, username, password):
-    """ Returns a logged in selenium session on the marked user
-        for a specific url (but you can override username and
-        password fixtures using conftest.py inheritance acquisition).
+def page(base_url, browser, request, page_mappings, default_page_class,
+         username, password):
+    """ Returns a selenium instance pointing to the base_url (not logged in).
+        Optionally base_url + page if available.
     """
-    # implement here your related login logics
-    return base_browser
+    page_id = None
+    try:
+        page_id = request.getfuncargvalue('page_id')
+    except FixtureLookupError:
+        pass
+    url = base_url
+
+    if page_id is None:
+        url = base_url
+        page_class = default_page_class
+    else:
+        page_mapping = page_mappings.get(page_id)
+        path = page_mapping['path']
+        page_class = page_mapping.get('page_class', default_page_class)
+        url = urljoin(base_url, path)
+
+    page = page_class(browser, base_url=url)
+
+    # visit url
+    page.open()
+
+    # login
+    if username and password:
+        page.login()
+
+    return page
 
 
 @pytest.fixture(scope="session")

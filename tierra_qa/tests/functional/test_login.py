@@ -14,12 +14,12 @@ def test_successfull_login():
 
 
 @pytest_bdd.given(pytest_bdd.parsers.parse('When I log in as {user}'))
-def i_am_loggedin_given(user, loggedin_browser):
+def i_am_loggedin_given(user, page):
     """Logged in fixture"""
 
 
 @pytest_bdd.then('I am logged in')
-def check_loggedin_then(loggedin_browser, username):
+def check_loggedin_then(page, username):
     """Assert user is logged in. Implement here your
        project related login logics.
     """

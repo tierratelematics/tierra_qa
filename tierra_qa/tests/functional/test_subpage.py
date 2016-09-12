@@ -12,13 +12,13 @@ def test_visit_subpage():
     """Login."""
 
 
-@pytest_bdd.given(pytest_bdd.parsers.parse('I visit the {page} page'))
-def visit_example_page(base_browser, page):
+@pytest_bdd.given(pytest_bdd.parsers.parse('I visit the {page_id} page'))
+def visit_example_page(page, page_id):
     """Dummy given."""
 
 
-@pytest_bdd.then(pytest_bdd.parsers.parse('I am on the {page} page'))
-def check_example_page_url(base_browser, base_url, page, page_mappings):
+@pytest_bdd.then(pytest_bdd.parsers.parse('I am on the {page_id} page'))
+def check_example_page_url(page, base_url, page_id, page_mappings):
     """ Check page url is corret """
     try:
         from urlparse import urljoin
@@ -26,4 +26,4 @@ def check_example_page_url(base_browser, base_url, page, page_mappings):
         # python3 compatibility
         from urllib.parse import urljoin
 
-    assert base_browser.url == urljoin(base_url, page_mappings[page])
+    assert page.driver.url == urljoin(base_url, page_mappings[page_id]['path'])
