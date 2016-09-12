@@ -13,8 +13,8 @@ def test_successfull_login():
     """Login."""
 
 
-@pytest_bdd.given(pytest_bdd.parsers.parse('When I log in as {user}'))
-def i_am_loggedin_given(user, loggedin_browser):
+@pytest_bdd.given(pytest_bdd.parsers.parse('When I log in as {user_id}'))
+def i_am_loggedin_given(user_id, loggedin_browser):
     """Logged in fixture"""
 
 
