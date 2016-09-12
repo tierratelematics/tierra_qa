@@ -45,7 +45,7 @@ def credentials_mapping(request, variables):
        For example::
          import pytest
 
-         @pytest.mark.user('USERID1')
+         @pytest.mark.user_id('USERID1')
          def test_login(loggedin_selenium):
            # you'll have a selenium session authenticated with the USERID1
            assert 1
@@ -60,10 +60,10 @@ def username(credentials_mapping, request):
     """ Returns the real (overridable) username associated to the user
          marker or fixture """
 
-    if 'user' in request.keywords:
-        userid = request.keywords['user'].args[0]
+    if 'user_id' in request.keywords:
+        userid = request.keywords['user_id'].args[0]
     else:
-        userid = request.getfuncargvalue('user')
+        userid = request.getfixturevalue('user_id')
     return credentials_mapping[userid]['username']
 
 
@@ -71,10 +71,10 @@ def username(credentials_mapping, request):
 def password(credentials_mapping, request):
     """ Returns the real (overridable) password associated to the user
         marker or fixture """
-    if 'user' in request.keywords:
-        userid = request.keywords['user'].args[0]
+    if 'user_id' in request.keywords:
+        userid = request.keywords['user_id'].args[0]
     else:
-        userid = request.getfuncargvalue('user')
+        userid = request.getfuncargvalue('user_id')
     return credentials_mapping[userid]['password']
 
 

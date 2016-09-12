@@ -70,7 +70,7 @@ The USERID1 will be used in order to mark tests if you want an authenticated ses
 
     import pytest
 
-    @pytest.mark.user('USERID1')
+    @pytest.mark.user_id('USERID1')
     def test_login(loggedin_browser):
         # you'll have a selenium session authenticated with the USERID1
         assert 1
