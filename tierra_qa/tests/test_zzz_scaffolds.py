@@ -113,5 +113,5 @@ def test_scaffold_tierra_qa(virtualenv, travis, splinter_webdriver):
         # run the tests
         subprocess.check_call([
             os.path.join('..', 'bin', 'py.test'),
-            '--splinter-webdriver', splinter_webdriver, '--credentials',
-            'Administrator;admin;admin'])
+            '--splinter-webdriver', splinter_webdriver,
+            '--variables', 'credentials_template.yml'])
