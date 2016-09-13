@@ -12,6 +12,10 @@ class BasePage(Page):
         # it's up to you implement the is loggedin logics
         pass
 
+    def logout(self):
+        # it's up to you implement the is loggedin logics
+        pass
+
     @property
     def current_url(self):
         """ Returns the current url """
