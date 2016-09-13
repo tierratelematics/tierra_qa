@@ -14,6 +14,10 @@ install_requires = [
     'pytest-variables[yaml]',
 ]
 
+docs_require = [
+    'Sphinx',
+    'sphinx_rtd_theme',
+    ]
 
 setup(name='tierra_qa',
       version=version,
