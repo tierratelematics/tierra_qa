@@ -38,3 +38,4 @@ tornado==4.4.1
 tox==2.3.1
 virtualenv==15.0.3
 watchdog==0.8.3
+-e git+https://github.com/tierratelematics/PyPOM.git@splinter#egg=PyPOM
