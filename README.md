@@ -52,10 +52,10 @@ Once installed you can launch tests with:
 
 With the ``--variables`` parameter you can read user credentials from a YAML file like that:
 ```
-   credentials:
-     USERID1:
-       username: USERNAME1
-       password: PASSWORD1
+credentials:
+  USERID1:
+    username: USERNAME1
+    password: PASSWORD1
 ```
 
 where:
