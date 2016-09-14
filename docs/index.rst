@@ -11,7 +11,7 @@ Change Log
 .. toctree::
     :maxdepth: 2
 
-    README <README>
+    tierra_qa <README>
     Changelog <changes>
 
 .. _py.test: https://github.com/pytest-dev/pytest
