@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import os
 
 version = '0.0.1dev'
 
@@ -15,12 +14,16 @@ install_requires = [
     'PyPOM[splinter]',
 ]
 
+docs_require = [
+    'Sphinx',
+    'sphinx_rtd_theme',
+    ]
 
 setup(name='tierra_qa',
       version=version,
       description="Tierra QA",
-      long_description=open("README.md").read() + "\n" +
-      open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.rst").read() + "\n" +
+      open("CHANGES.txt").read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
@@ -43,4 +46,7 @@ setup(name='tierra_qa',
       [console_scripts]
       tierra_qa_clone = tierra_qa.scripts:tierra_qa_clone
       """,
+      extras_require={
+          'docs': docs_require,
+          },
       )
