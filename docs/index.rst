@@ -3,36 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-=====================================
-Welcome to tierra_qa documentation!
-=====================================
-
-tierra_qa is a package that aims to find a new repeatable pattern for black box QA testing applied to any web application.
-
-It is internally based on:
-
-* `py.test`_
-* `pytest-splinter`_
-* `pytest-bdd`_
-
-
-How To
------------
-
-The following documentation links explain how to :ref:`install <installation>` it and how to :ref:`create <tutorial>` your first tierra_qa project / add on.
-
-.. toctree::
-    :maxdepth: 2
-
-    how_to/installation
-    how_to/tutorial
+.. include:: ./README.rst
 
 Change Log
 ----------
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
+    README <README>
     Changelog <changes>
 
 .. _py.test: https://github.com/pytest-dev/pytest

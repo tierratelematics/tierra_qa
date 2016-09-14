@@ -1,20 +1,25 @@
+=========
 tierra_qa
 =========
 
-[![Build Status](https://travis-ci.org/tierratelematics/tierra_qa.svg?branch=master)](https://travis-ci.org/tierratelematics/tierra_qa)
-[![Requirements Status](https://requires.io/github/tierratelematics/tierra_qa/requirements.svg?branch=master)](https://requires.io/github/tierratelematics/tierra_qa/requirements/?branch=master)
+.. image:: https://travis-ci.org/tierratelematics/tierra_qa.svg?branch=master
+       :target: https://travis-ci.org/tierratelematics/tierra_qa
+
+.. image:: https://requires.io/github/tierratelematics/tierra_qa/requirements.svg?branch=master
+       :target: https://requires.io/github/tierratelematics/tierra_qa/requirements/?branch=master
 
 ``tierra_qa`` is a package that aims to find a new repeatable pattern for 
 black box QA testing applied to any web application.
 
 It is internally based on:
-* py.test
-* pytest-splinter
-* pytest-bdd
-* PyPOM
+
+* `pytest`_
+* `pytest_splinter`_
+* `pytest_bdd`_
+* `PyPOM`_
 
 Why py.test
------------
+===========
 
 ``py.test`` is one of the most promising test frameworks built with Python. It is a generic
 framework, so it is not bound to the BDD practise.
@@ -25,13 +30,14 @@ It provides a clever dependency injection mechanism for fixture creations and it
 minimizing the amount of test code, reusability and modularity.
 
 More links:
+
 * http://pytest.org
 * https://pytest.org/latest/fixture.html
 * https://pytest.org/latest/example/markers.html
 * https://pytest.org/latest/example/simple.html
 
 How to install it
------------------
+=================
 
 Prerequisites:
 
@@ -39,30 +45,29 @@ Prerequisites:
 * virtualenv
 * Firefox (requires geckodriver), Chrome, etc
 
-Clone the ``tierra_qa`` package and run:
+Clone the ``tierra_qa`` package and run::
 
     $ python setup.py develop
 
 How to use it
--------------
+=============
 
-Once installed you can launch tests with:
+Once installed you can launch tests with::
 
-    $ py.test --splinter-webdriver=firefox [--base-url http://anotherurl.com/] --variables credentials_template.yml
+    $ py.test --splinter-webdriver=firefox --variables credentials_template.yml [--base-url http://anotherurl.com/]
 
-With the ``--variables`` parameter you can read user credentials from a YAML file like that:
-```
-credentials:
-  USERID1:
-    username: USERNAME1
-    password: PASSWORD1
-```
+With the ``--variables`` parameter you can read user credentials from a YAML file like that::
+
+    credentials:
+      USERID1:
+        username: USERNAME1
+        password: PASSWORD1
 
 where:
 
-* USERID1, stands for the user identifier used in test cases
-* USERNAME1, stands for the username used for login
-* PASSWORD1, password associated to the above username
+* *USERID1*, stands for the user identifier used in test cases
+* *USERNAME1*, stands for the username used for login
+* *PASSWORD1*, password associated to the above username
 
 The YAML file 'credentials_template.yml' has to be considered only a template for credentials and we
 *stronlgy* suggest to do not put credential files under version control.
@@ -73,7 +78,12 @@ By default the default ``base_url`` is http://tierratelematics.com/ and you can 
 How to create your own qa package
 =================================
 
-Once you have installed ``tierra_qa`` you can create your own package typing the following command:
-```
-$ tierra_qa_clone YOURPACKAGE_QA
-```
+Once you have installed ``tierra_qa`` you can create your own package typing the following command::
+
+    $ tierra_qa_clone YOURPACKAGE_QA
+
+
+.. _pytest: http://doc.pytest.org
+.. _pytest_splinter: http://pytest-splinter.readthedocs.io
+.. _pytest_bdd: http://pytest-bdd.readthedocs.io
+.. _PyPOM: http://pypom.readthedocs.io

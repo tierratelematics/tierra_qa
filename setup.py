@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import os
 
 version = '0.0.1dev'
 
@@ -23,8 +22,8 @@ docs_require = [
 setup(name='tierra_qa',
       version=version,
       description="Tierra QA",
-      long_description=open("README.md").read() + "\n" +
-      open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.rst").read() + "\n" +
+      open("CHANGES.txt").read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
