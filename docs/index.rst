@@ -12,6 +12,7 @@ Change Log
     :maxdepth: 2
 
     tierra_qa <README>
+    Contributors <contributors>
     Changelog <changes>
 
 .. _py.test: https://github.com/pytest-dev/pytest
