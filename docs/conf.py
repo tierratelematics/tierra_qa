@@ -68,7 +68,7 @@ release = u'0.1'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = u'en' 
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -150,7 +150,7 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 #
-# html_logo = None
+html_logo = './images/logoTIERRA.png'
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -227,7 +227,7 @@ html_last_updated_fmt = '%Y-%m-%d'
 #   'da', 'de', 'en', 'es', 'fi', 'fr', 'hu', 'it', 'ja'
 #   'nl', 'no', 'pt', 'ro', 'ru', 'sv', 'tr', 'zh'
 #
-# html_search_language = 'en'
+html_search_language = 'en'
 
 # A dictionary with options for the search language support, empty by default.
 # 'ja' uses this config value.
@@ -274,7 +274,7 @@ latex_documents = [
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
 #
-# latex_logo = None
+latex_logo = './images/logoTIERRA.png' 
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
@@ -325,7 +325,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'tierra_qa', u'tierra_qa Documentation',
-     author, 'tierra_qa', 'One line description of project.',
+     author, 'tierra_qa', 'Tierra QA project',
      'Miscellaneous'),
 ]
 

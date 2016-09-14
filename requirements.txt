@@ -33,9 +33,12 @@ six==1.10.0
 snowballstemmer==1.2.1
 Sphinx==1.4.6
 sphinx-autobuild==0.6.0
+sphinx-rtd-theme==0.1.9
 splinter==0.7.4
 tornado==4.4.1
 tox==2.3.1
 virtualenv==15.0.3
 watchdog==0.8.3
--e git+https://github.com/tierratelematics/PyPOM.git@splinter#egg=PyPOM
+zope.component==4.3.0
+zope.event==4.2.0
+zope.interface==4.3.2
