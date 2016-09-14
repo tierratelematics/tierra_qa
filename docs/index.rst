@@ -23,15 +23,15 @@ The following documentation links explain how to :ref:`install <installation>` i
 
 .. toctree::
     :maxdepth: 2
-    :titlesonly:
 
     how_to/installation
     how_to/tutorial
 
+Change Log
+----------
 
 .. toctree::
     :maxdepth: 1
-    :titlesonly:
 
     Changelog <changes>
 
