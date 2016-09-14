@@ -75,5 +75,5 @@ How to create your own qa package
 
 Once you have installed ``tierra_qa`` you can create your own package typing the following command:
 ```
-    $ tierra_qa_clone YOURPACKAGE_QA
+$ tierra_qa_clone YOURPACKAGE_QA
 ```
