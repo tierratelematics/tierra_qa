@@ -74,6 +74,9 @@ where:
 
 The YAML file 'credentials_template.yml' has to be considered only a template for credentials and we
 *stronlgy* suggest to do not put credential files under version control.
+If you use Travis CI (http://travis-ci.org/) you can encrypt files with sensible information:
+
+* https://docs.travis-ci.com/user/encrypting-files/
 
 By default the default ``base_url`` is http://tierratelematics.com/ and you can change it editing the
 ``setup.cfg`` file.
