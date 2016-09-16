@@ -50,6 +50,7 @@ Prerequisites:
 
 Clone the ``tierra_qa`` package and run::
 
+    $ pip install -r requirements.txt
     $ python setup.py develop
 
 How to use it
