@@ -4,7 +4,7 @@ from pypom import Page
 class BasePage(Page):
     """ This is the base page to be used in tierra_qa """
 
-    def login(self):
+    def login(self, username, password):
         # it's up to you implement the login logics
         pass
 

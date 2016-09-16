@@ -127,7 +127,7 @@ def page(base_url, browser, request, page_mappings, default_page_class,
 
     # login
     if username and password:
-        page.login()
+        page.login(username, password)
 
     return page
 
