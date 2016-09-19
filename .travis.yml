@@ -9,14 +9,16 @@ python:
   - "3.5"
 
 env:
-  - DRIVER=phantomjs
-  - DRIVER=firefox
-  - DRIVER=chrome
+  - TOXENV=phantomjs
+  - TOXENV=firefox
+  - TOXENV=chrome
+  - TOXENV=docs
+  - TOXENV=linkcheck
 
 matrix:
   allow_failures:
-    - env: DRIVER=firefox
-    - env: DRIVER=chrome
+    - env: TOXENV=firefox
+    - env: TOXENV=chrome
     - python: "3.5"
   
 install:
@@ -32,4 +34,4 @@ before_script:
 script:
   - export PATH="$PATH:`pwd`/bin"
   - ./scripts/setup_travis.sh
-  - tox -e ${DRIVER}
+  - tox -e ${TOXENV}
