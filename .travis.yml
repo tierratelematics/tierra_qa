@@ -25,6 +25,10 @@ matrix:
     env: TOXENV=docs
   - python: "3.5"
     env: TOXENV=linkcheck
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y graphvix
   
 install:
   - travis_retry pip install -U pip wheel setuptools

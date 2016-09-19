@@ -5,7 +5,7 @@
 
 .. include:: ./README.rst
 
-Change Log
+Index
 ----------
 
 .. toctree::
