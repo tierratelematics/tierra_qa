@@ -13,3 +13,4 @@ bin/*
 .idea/*
 tierra_qa/screenshots/*
 /docs/_build/
+.coverage
