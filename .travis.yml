@@ -17,13 +17,13 @@ env:
 
 matrix:
   allow_failures:
-    - env: TOXENV=firefox
-    - env: TOXENV=chrome
-    - python: "3.5"
+  - env: TOXENV=firefox
+  - env: TOXENV=chrome
+  - python: "3.5"
   exclude:
-    - python: "3.5"
+  - python: "3.5"
     env: TOXENV=docs
-    - python: "3.5"
+  - python: "3.5"
     env: TOXENV=linkcheck
   
 install:
