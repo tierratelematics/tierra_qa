@@ -9,15 +9,22 @@ python:
   - "3.5"
 
 env:
-  - DRIVER=phantomjs
-  - DRIVER=firefox
-  - DRIVER=chrome
+  - TOXENV=phantomjs
+  - TOXENV=firefox
+  - TOXENV=chrome
+  - TOXENV=docs
+  - TOXENV=linkcheck
 
 matrix:
   allow_failures:
-    - env: DRIVER=firefox
-    - env: DRIVER=chrome
-    - python: "3.5"
+  - env: TOXENV=firefox
+  - env: TOXENV=chrome
+  - python: "3.5"
+  exclude:
+  - python: "3.5"
+    env: TOXENV=docs
+  - python: "3.5"
+    env: TOXENV=linkcheck
   
 install:
   - travis_retry pip install -U pip wheel setuptools
@@ -32,4 +39,4 @@ before_script:
 script:
   - export PATH="$PATH:`pwd`/bin"
   - ./scripts/setup_travis.sh
-  - tox -e ${DRIVER}
+  - tox -e ${TOXENV}
