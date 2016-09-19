@@ -4,6 +4,7 @@
 *.pyo
 *.swp
 *.log
+*.xml
 .tox
 .eggs/
 python
