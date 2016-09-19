@@ -14,6 +14,7 @@ env:
   - TOXENV=chrome
   - TOXENV=docs
   - TOXENV=linkcheck
+  - TOXENV=codecov
 
 matrix:
   allow_failures:
@@ -44,3 +45,6 @@ script:
   - export PATH="$PATH:`pwd`/bin"
   - ./scripts/setup_travis.sh
   - tox -e ${TOXENV}
+
+after_success:
+  - codecov
