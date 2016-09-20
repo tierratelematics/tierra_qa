@@ -33,6 +33,7 @@ from docutils.utils import get_source_line
 # ones.
 extensions = [
     'sphinx.ext.todo',
+    'sphinx.ext.graphviz'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
