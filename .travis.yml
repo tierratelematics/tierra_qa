@@ -26,6 +26,8 @@ matrix:
     env: TOXENV=docs
   - python: "3.5"
     env: TOXENV=linkcheck
+  - python: "3.5"
+    env: TOXENV=codecov
 
 before_install:
   - sudo apt-get -qq update
