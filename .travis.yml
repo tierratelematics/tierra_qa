@@ -26,6 +26,8 @@ matrix:
     env: TOXENV=docs
   - python: "3.5"
     env: TOXENV=linkcheck
+  - python: "3.5"
+    env: TOXENV=codecov
   
 install:
   - travis_retry pip install -U pip wheel setuptools
