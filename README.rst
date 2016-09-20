@@ -97,9 +97,16 @@ The following diagram shows the interactions between the `pytest fixtures`_ crea
 
    digraph {
       page [shape=box];
-      page -> {username password page_mappings default_page_class};
-      username -> credentials_mapping;
-      password -> credentials_mapping;
+      variables [color="red"];
+      request -> {username password credentials_mapping page};
+      variables -> credentials_mapping;
+      credentials_mapping -> {username password};
+      username -> page;
+      password -> page;
+      base_url -> page;
+      browser -> page;
+      page_mappings -> page;
+      default_page_class -> page; 
    }
 
 
