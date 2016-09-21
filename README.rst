@@ -71,6 +71,7 @@ With the ``--variables`` parameter you can read user credentials from a YAML fil
       USERID1:
         username: USERNAME1
         password: PASSWORD1
+
 where:
 
 * *USERID1*, stands for the user identifier used in test cases
