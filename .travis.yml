@@ -15,6 +15,7 @@ env:
   - TOXENV=docs
   - TOXENV=linkcheck
   - TOXENV=codecov
+  - TOXENV=pycodestyle
 
 matrix:
   allow_failures:
