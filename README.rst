@@ -12,7 +12,10 @@ tierra_qa
        :target: http://tierra_qa.readthedocs.io
 
 .. image:: https://codecov.io/gh/tierratelematics/tierra_qa/branch/master/graph/badge.svg
-          :target: https://codecov.io/gh/tierratelematics/tierra_qa
+       :target: https://codecov.io/gh/tierratelematics/tierra_qa
+
+.. image:: https://api.codacy.com/project/badge/Grade/0698c7aa2e164ee996518737aad7d6f4
+       :target: https://www.codacy.com/app/davide-moro/tierra_qa?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tierratelematics/tierra_qa&amp;utm_campaign=Badge_Grade
 
 
 
