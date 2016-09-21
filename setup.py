@@ -8,6 +8,8 @@ install_requires = [
     'pytest-splinter',
     'pytest-base-url',
     'tox',
+    'pytest-cov',
+    'mock',
     'pytest-travis-fold',
     'virtualenv',  # needed for scaffolding tests
     'pytest-variables[yaml]',
