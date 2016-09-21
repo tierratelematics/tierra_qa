@@ -11,6 +11,11 @@ tierra_qa
 .. image:: https://readthedocs.org/projects/tierra_qa/badge/?version=latest
        :target: http://tierra_qa.readthedocs.io
 
+.. image:: https://codecov.io/gh/tierratelematics/tierra_qa/branch/master/graph/badge.svg
+          :target: https://codecov.io/gh/tierratelematics/tierra_qa
+
+
+
 ``tierra_qa`` is a package that aims to find a new repeatable pattern for 
 black box QA testing applied to any web application.
 

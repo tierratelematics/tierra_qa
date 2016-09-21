@@ -8,6 +8,17 @@ import pkg_resources
 
 
 def tierra_qa_clone():
+    options, args = _optparse_args()
+    if not len(args) == 1:
+        print('You must provide at least one argument')
+        return 2
+
+    print('Start translating package...')
+    _translate(args[0])
+    print('Done!')
+
+
+def _optparse_args():
     description = """\
     Clone the tierra_qa creating a new package with another name
     """
@@ -16,15 +27,7 @@ def tierra_qa_clone():
         usage=usage,
         description=textwrap.dedent(description)
         )
-
-    options, args = parser.parse_args(sys.argv[1:])
-    if not len(args) == 1:
-        print('You must provide at least one argument')
-        return 2
-
-    print('Start translating package...')
-    _translate(args[0])
-    print('Done!')
+    return parser.parse_args(sys.argv[1:])
 
 
 def _translate(new_package_name, original_package_name='tierra_qa'):
@@ -54,7 +57,7 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
         new_package_name,
         ignore=shutil.ignore_patterns(
             '*.pyc', '.svn', '*.tmp', '*.egg-info', '*.egg',
-            '.git', 'node_modules', '*.swp', '*~',))
+            '.git', 'node_modules', '*.swp', '*~', 'python',))
 
     original_slices = package_split(original_package_name)
     new_slices = package_split(new_package_name)

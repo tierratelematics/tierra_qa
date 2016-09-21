@@ -14,6 +14,7 @@ env:
   - TOXENV=chrome
   - TOXENV=docs
   - TOXENV=linkcheck
+  - TOXENV=codecov
 
 matrix:
   allow_failures:
@@ -25,6 +26,8 @@ matrix:
     env: TOXENV=docs
   - python: "3.5"
     env: TOXENV=linkcheck
+  - python: "3.5"
+    env: TOXENV=codecov
 
 before_install:
   - sudo apt-get -qq update
@@ -44,3 +47,6 @@ script:
   - export PATH="$PATH:`pwd`/bin"
   - ./scripts/setup_travis.sh
   - tox -e ${TOXENV}
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -e ${TOXENV}
