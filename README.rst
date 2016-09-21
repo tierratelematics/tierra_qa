@@ -66,7 +66,6 @@ With the ``--variables`` parameter you can read user credentials from a YAML fil
       USERID1:
         username: USERNAME1
         password: PASSWORD1
-
 where:
 
 * *USERID1*, stands for the user identifier used in test cases
@@ -89,29 +88,9 @@ Once you have installed ``tierra_qa`` you can create your own package typing the
 
     $ tierra_qa_clone YOURPACKAGE_QA
 
-Fixtures Diagrams
-=================================
-The following diagram shows the interactions between the `pytest fixtures`_ created in the ``tierra_qa`` package:
-
-.. graphviz::
-
-   digraph {
-      page [shape=box];
-      variables [color="red"];
-      request -> {username password credentials_mapping page};
-      variables -> credentials_mapping;
-      credentials_mapping -> {username password};
-      username -> page;
-      password -> page;
-      base_url -> page;
-      browser -> page;
-      page_mappings -> page;
-      default_page_class -> page; 
-   }
-
+.. include:: ./fixture_diagrams.rst
 
 .. _pytest: http://doc.pytest.org
 .. _pytest_splinter: http://pytest-splinter.readthedocs.io
 .. _pytest_bdd: http://pytest-bdd.readthedocs.io
 .. _PyPOM: http://pypom.readthedocs.io
-.. _pytest fixtures: http://doc.pytest.org/en/latest/fixture.html
