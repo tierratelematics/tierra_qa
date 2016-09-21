@@ -115,3 +115,41 @@ def test_scaffold_tierra_qa(virtualenv, travis, splinter_webdriver):
             os.path.join('..', 'bin', 'py.test'),
             '--splinter-webdriver', splinter_webdriver,
             '--variables', 'credentials_template.yml'])
+
+
+@slow
+def test_scaffold_tierra_qa_clone_translate():
+    """ Assert if internal _translate has been called with right input """
+    import mock
+    with mock.patch('tierra_qa.scripts._translate') as mock_translate:
+        with mock.patch('tierra_qa.scripts._optparse_args') as mock_optparse:
+            from tierra_qa.scripts import tierra_qa_clone
+            mock_optparse.return_value = [{}, ['new_name']]
+            tierra_qa_clone()
+            mock_translate.assert_called_once_with('new_name')
+
+
+@slow
+def test_scaffold_tierra_qa_clone_translate_noinput():
+    """ Assert if internal _translate has not been called without required
+        parameters
+    """
+    import mock
+    with mock.patch('tierra_qa.scripts._translate') as mock_translate:
+        with mock.patch('tierra_qa.scripts._optparse_args') as mock_optparse:
+            from tierra_qa.scripts import tierra_qa_clone
+            mock_optparse.return_value = [{}, []]
+            tierra_qa_clone()
+            assert not mock_translate.called
+
+
+# @slow
+# def test_scaffold_tierra_qa_clone_translate_nomock(tmpdir):
+#     """ _translate call should replicate tierra_qa structure """
+#     import os
+#     os.chdir(tmpdir.strpath)
+#     import mock
+#     with mock.patch('tierra_qa.scripts._optparse_args') as mock_optparse:
+#         from tierra_qa.scripts import tierra_qa_clone
+#         mock_optparse.return_value = [{}, ['new_name1']]
+#         tierra_qa_clone()
