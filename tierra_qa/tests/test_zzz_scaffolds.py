@@ -143,13 +143,17 @@ def test_scaffold_tierra_qa_clone_translate_noinput():
             assert not mock_translate.called
 
 
-# @slow
-# def test_scaffold_tierra_qa_clone_translate_nomock(tmpdir):
-#     """ _translate call should replicate tierra_qa structure """
-#     import os
-#     os.chdir(tmpdir.strpath)
-#     import mock
-#     with mock.patch('tierra_qa.scripts._optparse_args') as mock_optparse:
-#         from tierra_qa.scripts import tierra_qa_clone
-#         mock_optparse.return_value = [{}, ['new_name1']]
-#         tierra_qa_clone()
+@slow
+def test_scaffold_tierra_qa_clone_translate_nomock(tmpdir):
+    """ _translate call should replicate tierra_qa structure """
+    import os
+    import mock
+    previous_path = os.getcwd()
+    os.chdir(tmpdir.strpath)
+    try:
+        with mock.patch('tierra_qa.scripts._optparse_args') as mock_optparse:
+            from tierra_qa.scripts import tierra_qa_clone
+            mock_optparse.return_value = [{}, ['new_name1']]
+            tierra_qa_clone()
+    finally:
+        os.chdir(previous_path)
