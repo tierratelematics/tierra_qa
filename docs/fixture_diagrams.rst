@@ -5,17 +5,17 @@ The following diagram shows the interactions between the `pytest fixtures`_ crea
 .. graphviz::
 
    digraph {
-      page [shape=box];
-      variables [color="red"];
-      request -> {username password credentials_mapping page};
-      variables -> credentials_mapping;
-      credentials_mapping -> {username password};
-      username -> page;
-      password -> page;
-      base_url -> page;
-      browser -> page;
-      page_mappings -> page;
-      default_page_class -> page; 
+      base_url [color="grey"];
+      browser [color="grey"];
+      request [color="grey"];
+      base_url -> {page} [color="grey"];
+      browser -> {page} [color="grey"];
+      request -> {page credentials_mapping username password} [color="grey"];
+      credentials_mapping -> {username password}
+      username -> {page};
+      password -> {page};
+      page_mappings -> {page};
+      default_page_class -> {page};
    }
 
 
