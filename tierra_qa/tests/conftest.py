@@ -2,7 +2,8 @@
 Fixture Diagrams
 ----------------
 
-The following diagram shows the interactions between the `pytest fixtures`_ created in the ``tierra_qa`` package:
+The following diagram shows the interactions between the `pytest fixtures`_
+created in the ``tierra_qa`` package:
 
 .. graphviz::
 
