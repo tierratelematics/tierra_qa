@@ -12,6 +12,7 @@ Index
     :maxdepth: 2
 
     tierra_qa <README>
+    Advanced <advanced>
     Contributors <contributors>
     Changelog <changes>
 

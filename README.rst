@@ -97,7 +97,6 @@ Once you have installed ``tierra_qa`` you can create your own package typing the
 
     $ tierra_qa_clone YOURPACKAGE_QA
 
-.. include:: ./fixture_diagrams.rst
 
 .. _pytest: http://doc.pytest.org
 .. _pytest_splinter: http://pytest-splinter.readthedocs.io
