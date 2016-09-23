@@ -118,10 +118,10 @@ def password(credentials_mapping, request):
 def page_mappings():
     """
         Returns the page mappings dictionary with all known page with:
+
         * paths
         * optional page object class (otherwise the default implementation
-          will be used as fallback provided
-          by :py:func:`default_page_class`)
+          will be used as fallback provided by :py:func:`default_page_class`)
 
         See :py:mod:`tierra_qa.config` for further details.
 
@@ -153,6 +153,7 @@ def page(base_url, browser, request, page_mappings, default_page_class,
         provides a ``user_id`` parameter in your BDD file.
 
         The page class depends on your page class mappings:
+
         * :py:class:`tierra_qa.pages.BasePage` as fallback class
         * whatever you want if you provide something different in
           :py:mod:`tierra_qa.config`'s ``PAGE_MAPPINGS`` dict returned by
