@@ -63,20 +63,13 @@ def pytestbdd_feature_base_dir():
 @pytest.fixture(scope='session')
 def credentials_mapping(request, variables):
     """
-       This fixture provides users credentials via a file specified on the
-       --variables option.The file format is one supported by pytest-variables.
+        This fixture provides users credentials via a file specified on the
+        --variables option.The file format is one supported by
+        pytest-variables.
 
-       On the test side you just have to add a marker where you specify
-       the user identifier you want to operate with.
-
-       For example::
-         import pytest
-
-         @pytest.mark.user_id('USERID1')
-         def test_login(loggedin_selenium):
-           # you'll have a selenium session authenticated with the USERID1
-           assert 1
-
+        :return: credentials mapping dictionary with all available credentials
+        :rtype: dict
+        :raises: KeyError
     """
 
     return variables['credentials']
@@ -84,8 +77,13 @@ def credentials_mapping(request, variables):
 
 @pytest.fixture
 def username(credentials_mapping, request):
-    """ Returns the real (overridable) username associated to the user
-         marker or fixture """
+    """ Returns the username associated to the user
+        marker or in BDD tests.
+
+        :return: username used in login
+        :rtype: str
+        :raises: KeyError
+    """
 
     if 'user_id' in request.keywords:
         userid = request.keywords['user_id'].args[0]
@@ -99,8 +97,13 @@ def username(credentials_mapping, request):
 
 @pytest.fixture
 def password(credentials_mapping, request):
-    """ Returns the real (overridable) password associated to the user
-        marker or fixture """
+    """ Returns the password associated to the user
+        marker or in BDD tests.
+
+        :return: password used in login
+        :rtype: str
+        :raises: KeyError
+    """
     if 'user_id' in request.keywords:
         userid = request.keywords['user_id'].args[0]
     else:
@@ -113,16 +116,25 @@ def password(credentials_mapping, request):
 
 @pytest.fixture(scope="session")
 def page_mappings():
-    """ Returns the page mappings for paths and page object
-        classes.
+    """
+        Returns the page mappings dictionary with all known page with:
+        * paths
+        * optional page object class (otherwise the default implementation
+          will be used as fallback provided
+          by :py:func:`default_page_class`)
 
-        See tierra_qa.config.PAGE_MAPPINGS for further details.
+        See :py:mod:`tierra_qa.config` for further details.
+
+        :return: dictionary with all known pages
+        :rtype: dict`
     """
     return tierra_qa.config.PAGE_MAPPINGS
 
 
 @pytest.fixture
 def default_page_class():
+    """
+    """
     return tierra_qa.pages.BasePage
 
 
