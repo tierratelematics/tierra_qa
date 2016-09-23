@@ -189,7 +189,6 @@ def page(base_url, browser, request, page_mappings, default_page_class,
     # visit url
     page.open()
 
-
     return page
 
 
