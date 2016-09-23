@@ -134,6 +134,10 @@ def page_mappings():
 @pytest.fixture
 def default_page_class():
     """
+        Returns the default page object base class.
+
+        :return: base page object class
+        :rtype: :py:class:`tierra_qa.pages.BasePage`
     """
     return tierra_qa.pages.BasePage
 
@@ -141,8 +145,24 @@ def default_page_class():
 @pytest.fixture
 def page(base_url, browser, request, page_mappings, default_page_class,
          username, password):
-    """ Returns a selenium instance pointing to the base_url (not logged in).
-        Optionally base_url + page if available.
+    """
+        Returns a page object instance for the ``page_id`` provided in
+        BDD parameters that wraps a Splinter driver.
+
+        Optionally the splinter driver might be authenticated, if you
+        provides a ``user_id`` parameter in your BDD file.
+
+        The page class depends on your page class mappings:
+        * :py:class:`tierra_qa.pages.BasePage` as fallback class
+        * whatever you want if you provide something different in
+          :py:mod:`tierra_qa.config`'s ``PAGE_MAPPINGS`` dict returned by
+          the :py:func:`page_mappings` fixture
+
+        Optionally the Splinter driver will point to the ``base_url`` option
+        you provide in configuration files or through command line.
+
+        :return: base page object instance
+        :rtype: :py:class:`tierra_qa.pages.BasePage`
     """
     page_id = None
     try:
@@ -162,12 +182,13 @@ def page(base_url, browser, request, page_mappings, default_page_class,
 
     page = page_class(browser, base_url=url)
 
-    # visit url
-    page.open()
-
     # login
     if username and password:
         page.login(username, password)
+
+    # visit url
+    page.open()
+
 
     return page
 
