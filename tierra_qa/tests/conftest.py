@@ -162,6 +162,9 @@ def page(base_url, browser, request, page_mappings, default_page_class,
         Optionally the Splinter driver will point to the ``base_url`` option
         you provide in configuration files or through command line.
 
+        If this fixture does not fit your needs you can override it
+        placing another ``page`` fixture on your own ``conftest.py`` module.
+
         :return: base page object instance
         :rtype: :py:class:`tierra_qa.pages.BasePage`
     """
