@@ -89,7 +89,7 @@ def username(credentials_mapping, request):
         userid = request.keywords['user_id'].args[0]
     else:
         try:
-            userid = request.getfuncargvalue('user_id')
+            userid = request.getfixturevalue('user_id')
         except FixtureLookupError:
             userid = None
     return userid and credentials_mapping[userid]['username'] or None
@@ -108,7 +108,7 @@ def password(credentials_mapping, request):
         userid = request.keywords['user_id'].args[0]
     else:
         try:
-            userid = request.getfuncargvalue('user_id')
+            userid = request.getfixturevalue('user_id')
         except FixtureLookupError:
             userid = None
     return userid and credentials_mapping[userid]['password'] or None
