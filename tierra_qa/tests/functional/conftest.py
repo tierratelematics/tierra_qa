@@ -6,7 +6,7 @@
     are meant to be shared with different steps and reused.
 
     You could organize your tests in modules, each of them with
-    a conftest.py module in order to create a scope hieararchy.
+    a conftest.py module in order to create a scope hierarchy.
 """
 
 try:
