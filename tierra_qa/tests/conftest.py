@@ -170,7 +170,7 @@ def page(base_url, browser, request, page_mappings, default_page_class,
     """
     page_id = None
     try:
-        page_id = request.getfuncargvalue('page_id')
+        page_id = request.getfixturevalue('page_id')
     except FixtureLookupError:
         pass
     url = base_url
