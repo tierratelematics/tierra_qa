@@ -203,14 +203,10 @@ def skip_by_skin_names(request, skin):
         because the related page object implementation still not exists.
 
         If you want you can omit a test execution for a given skin adding a
-        decorator like that::
+        a ```@pytest.mark.skip_skins(['skin2'])``` decorator on your tests.
 
-
-        >>> @pytest.mark.skip_skins(['skin2'])
-        >>> def test_something():
-        >>>    assert 1
-
-        The above test will be executed for all skins except for skin2.
+        Tests marked with a skin2 skip will be executed for all skins
+        except for skin2.
 
         See http://bit.ly/2dYnOSv for further info.
     """
