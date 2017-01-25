@@ -41,17 +41,17 @@ def get_page_class(skin_name, page_mappings, page_id=None, fallback=None):
 
 
 def page_factory(base_url, browser, default_page_class, page_mappings,
-                 page_id=None, **kwargs):
+                 skin_name, page_id=None, **kwargs):
     url = base_url
 
     if page_id is None:
         url = base_url
         page_class = default_page_class
     else:
-        # TODO: get page url
-        # TODO: get page class
         path = page_mappings[page_id]['path']
         page_class = get_page_class(
+            skin_name,
+            page_mappings,
             page_id=page_id, fallback=default_page_class)
         url = urljoin(base_url, path)
 

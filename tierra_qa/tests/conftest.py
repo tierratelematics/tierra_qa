@@ -132,13 +132,14 @@ def default_page_class(skin, page_mappings):
 
 
 @pytest.fixture
-def base_page(base_url, browser, default_page_class, page_mappings):
+def base_page(base_url, browser, default_page_class, page_mappings, skin):
     """ Base page instance """
     page = page_factory(
         base_url,
         browser,
         default_page_class,
-        page_mappings)
+        page_mappings,
+        skin)
 
     # visit target url
     page.open()
