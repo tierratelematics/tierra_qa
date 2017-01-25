@@ -3,7 +3,7 @@
 set -ev
 
 mkdir bin
-export PATH="$PATH:`pwd`/bin"
+export PATH="$PATH:$(pwd)/bin"
 
 if [ "${DRIVER}" = "phantomjs" ]; then
   wget -O - https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar -xj
