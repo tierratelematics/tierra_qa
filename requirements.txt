@@ -26,6 +26,7 @@ pypom-form==0.2.0
 pytest==3.0.6
 pytest-bdd==2.18.1
 pytest-cov==2.4.0
+pytest-html==1.13.0
 pytest-splinter==1.8.1
 pytest-travis-fold==1.2.0
 pytest-variables==1.4
