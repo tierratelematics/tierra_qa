@@ -65,11 +65,14 @@ def virtualenv(request, travis):
         env.update({'VIRTUAL_ENV': virtualenv_directory, })
 
         # install requirements.txt into the virtualenv
-        subprocess.check_call([
-            os.path.join('bin', 'pip'),
-            'install', '-r',
-            os.path.join(cwd, 'requirements.txt')],
-            env=env)
+        for req_file in ['requirements.txt',
+                         'tests_requirements.txt',
+                         'docs_requirements.txt']:
+            subprocess.check_call([
+                os.path.join('bin', 'pip'),
+                'install', '-r',
+                os.path.join(cwd, req_file)],
+                env=env)
 
         # setuptools-git is required to be able to call setup.py install
         # sucessfully.  also install psycopg2 and oursql.
