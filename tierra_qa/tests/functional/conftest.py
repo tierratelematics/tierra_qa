@@ -71,5 +71,4 @@ def check_page_url_no_follow(navigation,
                              page_id):
     """ Check page url matches """
     page = navigation.page
-    page.wait_for_full_spinner()
     _check_page_url(page, page_id)
