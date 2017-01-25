@@ -26,7 +26,7 @@ def _optparse_args():
     parser = optparse.OptionParser(
         usage=usage,
         description=textwrap.dedent(description)
-        )
+    )
     return parser.parse_args(sys.argv[1:])
 
 
@@ -42,7 +42,7 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
         len_items = len(items)
         results = [package_name, items[-1].capitalize()]
 
-        for count in range(1, len_items-1):
+        for count in range(1, len_items - 1):
             el = items[:-count]
             if el:
                 results.append('.'.join(el))
@@ -50,14 +50,14 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
         return results
 
     # copy tree
-    original_location = pkg_resources.\
+    original_location = pkg_resources. \
         get_distribution(original_package_name).location
     shutil.copytree(
         original_location,
         new_package_name,
         ignore=shutil.ignore_patterns(
             '*.pyc', '.svn', '*.tmp', '*.egg-info', '*.egg',
-            '.git', 'node_modules', '*.swp', '*~', 'python',))
+            '.git', 'node_modules', '*.swp', '*~', 'python', ))
 
     original_slices = package_split(original_package_name)
     new_slices = package_split(new_package_name)

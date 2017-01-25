@@ -6,14 +6,14 @@ version = '0.0.1dev'
 install_requires = [
     'pytest-bdd',
     'pytest-splinter',
-    'pytest-base-url',
     'tox',
     'pytest-cov',
     'mock',
     'pytest-travis-fold',
     'virtualenv',  # needed for scaffolding tests
     'pytest-variables[yaml]',
-    'PyPOM[splinter]',
+    'pypom_form'
+    'colander',
 ]
 
 docs_require = [

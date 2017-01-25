@@ -25,33 +25,30 @@ created in the ``tierra_qa`` package:
 .. _pytest fixtures: http://doc.pytest.org/en/latest/fixture.html
 """
 
-
-try:
-    from urlparse import urljoin
-except ImportError:
-    # python3 compatibility
-    from urllib.parse import urljoin
-
 import os
+
 import pytest
-try:
-    from _pytest.fixtures import FixtureLookupError
-except ImportError:
-    from _pytest.python import FixtureLookupError
 
 import tierra_qa
+from tierra_qa.util import (
+    get_page_class,
+    page_factory,
+)
+from tierra_qa.navigation import Navigation
 
 
 def pytest_addoption(parser):
-    # ``py.test --runslow`` causes the entire testsuite to be run, including
-    # test that are decorated with ``@@slow`` (scaffolding tests).
+    # ``py.test --framework`` causes the entire testsuite to be run, including
+    # test that are decorated with ``@@framework`` (scaffolding tests).
     # see http://pytest.org/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option  # noqa
-    parser.addoption("--runslow", action="store_true", help="run slow tests")
+    parser.addoption("--framework", action="store_true",
+                     help="run framework tests")
 
 
 def pytest_runtest_setup(item):
-    if 'slow' in item.keywords and not item.config.getoption("--runslow"):
-        pytest.skip("need --runslow option to run")
+    if 'framework' in item.keywords and \
+            not item.config.getoption("--framework"):
+        pytest.skip("need --framework option to run")
 
 
 @pytest.fixture
@@ -61,7 +58,7 @@ def pytestbdd_feature_base_dir():
 
 
 @pytest.fixture(scope='session')
-def credentials_mapping(request, variables):
+def credentials_mapping(skin, variables):
     """
         This fixture provides users credentials via a file specified on the
         --variables option.The file format is one supported by
@@ -71,47 +68,22 @@ def credentials_mapping(request, variables):
         :rtype: dict
         :raises: KeyError
     """
+    return variables['skins'][skin]['credentials']
 
-    return variables['credentials']
 
-
-@pytest.fixture
-def username(credentials_mapping, request):
-    """ Returns the username associated to the user
-        marker or in BDD tests.
-
-        :return: username used in login
-        :rtype: str
-        :raises: KeyError
+@pytest.fixture(scope='session', params=tierra_qa.config.DEFAULT_PAGES.keys())
+def skin(request):
+    """ This fixture provides the skin associated with the application
+        on which starts the test session.
     """
-
-    if 'user_id' in request.keywords:
-        userid = request.keywords['user_id'].args[0]
-    else:
-        try:
-            userid = request.getfixturevalue('user_id')
-        except FixtureLookupError:
-            userid = None
-    return userid and credentials_mapping[userid]['username'] or None
+    return request.param
 
 
-@pytest.fixture
-def password(credentials_mapping, request):
-    """ Returns the password associated to the user
-        marker or in BDD tests.
-
-        :return: password used in login
-        :rtype: str
-        :raises: KeyError
+@pytest.fixture(scope='session')
+def base_url(skin, variables):
+    """ Returns the base_url associated to the skin.
     """
-    if 'user_id' in request.keywords:
-        userid = request.keywords['user_id'].args[0]
-    else:
-        try:
-            userid = request.getfixturevalue('user_id')
-        except FixtureLookupError:
-            userid = None
-    return userid and credentials_mapping[userid]['password'] or None
+    return variables['skins'][skin]['base_url']
 
 
 @pytest.fixture(scope="session")
@@ -132,68 +104,78 @@ def page_mappings():
 
 
 @pytest.fixture
-def default_page_class():
+def default_page_class(skin, page_mappings):
     """
         Returns the default page object base class.
 
         :return: base page object class
         :rtype: :py:class:`tierra_qa.pages.BasePage`
     """
-    return tierra_qa.pages.BasePage
+    return get_page_class(
+        skin,
+        page_mappings,
+    )
 
 
 @pytest.fixture
-def page(base_url, browser, request, page_mappings, default_page_class,
-         username, password):
-    """
-        Returns a page object instance for the ``page_id`` provided in
-        BDD parameters that wraps a Splinter driver.
+def base_page(base_url, browser, default_page_class, page_mappings):
+    """ Base page instance """
+    page = page_factory(
+        base_url,
+        browser,
+        default_page_class,
+        page_mappings)
 
-        Optionally the splinter driver might be authenticated, if you
-        provides a ``user_id`` parameter in your BDD file.
-
-        The page class depends on your page class mappings:
-
-        * :py:class:`tierra_qa.pages.BasePage` as fallback class
-        * whatever you want if you provide something different in
-          :py:mod:`tierra_qa.config`'s ``PAGE_MAPPINGS`` dict returned by
-          the :py:func:`page_mappings` fixture
-
-        Optionally the Splinter driver will point to the ``base_url`` option
-        you provide in configuration files or through command line.
-
-        If this fixture does not fit your needs you can override it
-        placing another ``page`` fixture on your own ``conftest.py`` module.
-
-        :return: base page object instance
-        :rtype: :py:class:`tierra_qa.pages.BasePage`
-    """
-    page_id = None
-    try:
-        page_id = request.getfixturevalue('page_id')
-    except FixtureLookupError:
-        pass
-    url = base_url
-
-    if page_id is None:
-        url = base_url
-        page_class = default_page_class
-    else:
-        page_mapping = page_mappings.get(page_id)
-        path = page_mapping['path']
-        page_class = page_mapping.get('page_class', default_page_class)
-        url = urljoin(base_url, path)
-
-    page = page_class(browser, base_url=url)
-
-    # login
-    if username and password:
-        page.login(username, password)
-
-    # visit url
+    # visit target url
     page.open()
 
     return page
+
+
+@pytest.fixture
+def page_instance(base_page):
+    """ Initialize base page.
+        You can override this fixture in order to customize
+        the page initialization (eg: some sites needs auth
+        after, other sites before)
+    """
+
+    # maximize window
+    base_page.driver.driver.maximize_window()
+
+    return base_page
+
+
+@pytest.fixture
+def navigation(navigation_class,
+               page_instance,
+               default_page_class,
+               page_mappings,
+               credentials_mapping,
+               skin,
+               base_url):
+    """ Wraps a page and a page mappings accessible by
+        pages.
+
+        ``navigation.page`` is meant to be mutable since
+        through the BDD steps the page instance could
+        change.
+    """
+    nav = navigation_class(
+        page_instance,
+        default_page_class,
+        page_mappings,
+        credentials_mapping,
+        skin,
+        base_url)
+    return nav
+
+
+@pytest.fixture
+def navigation_class():
+    """ Returns the navigation class used for wrap pages"""
+
+    return Navigation
 
 
 @pytest.fixture(scope="session")
@@ -208,3 +190,30 @@ def splinter_driver_kwargs(splinter_webdriver):
     if splinter_webdriver == 'firefox':
         return {'capabilities': {'marionette': True}}
     return {}
+
+
+@pytest.fixture(autouse=True)
+def skip_by_skin_names(request, skin):
+    """ Skip by skin name.
+
+        We support validation for multi skin applications providing the best
+        page object class match.
+
+        We expect many failures we want to avoid because many tests will fail
+        because the related page object implementation still not exists.
+
+        If you want you can omit a test execution for a given skin adding a
+        decorator like that::
+
+
+        >>> @pytest.mark.skip_skins(['skin2'])
+        >>> def test_something():
+        >>>    assert 1
+
+        The above test will be executed for all skins except for skin2.
+
+        See http://bit.ly/2dYnOSv for further info.
+    """
+    if request.node.get_marker('skip_skins'):
+        if skin in request.node.get_marker('skip_skins').args[0]:
+            pytest.skip('skipped on this skin: {}'.format(skin))
