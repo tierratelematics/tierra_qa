@@ -28,6 +28,7 @@ It is internally based on:
 * `pytest_splinter`_
 * `pytest_bdd`_
 * `PyPOM`_
+* `pypom_form`_
 
 Why py.test
 ===========
@@ -59,6 +60,7 @@ Prerequisites:
 Clone the ``tierra_qa`` package and run::
 
     $ pip install -r requirements.txt
+    $ pip install -r tests_requirements.txt
     $ python setup.py develop
 
 How to use it
@@ -102,3 +104,4 @@ Once you have installed ``tierra_qa`` you can create your own package typing the
 .. _pytest_splinter: http://pytest-splinter.readthedocs.io
 .. _pytest_bdd: http://pytest-bdd.readthedocs.io
 .. _PyPOM: http://pypom.readthedocs.io
+.. _pypom_form: http://pypom-form.readthedocs.io
