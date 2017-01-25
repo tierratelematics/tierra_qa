@@ -12,7 +12,7 @@ install_requires = [
     'pytest-travis-fold',
     'virtualenv',  # needed for scaffolding tests
     'pytest-variables[yaml]',
-    'pypom_form'
+    'pypom_form',
     'colander',
 ]
 
