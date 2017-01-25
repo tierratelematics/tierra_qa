@@ -5,7 +5,7 @@ Base page implementation
 This is where the base page implementation lives.
 """
 
-from pypom_form import BaseFormPage
+from pypom_form.form import BaseFormPage
 
 
 class BasePage(BaseFormPage):
