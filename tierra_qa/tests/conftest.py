@@ -21,7 +21,8 @@ created in the ``tierra_qa`` package:
       variables [color="grey"];
       request [color="grey"];
       browser [color="grey"];
-      skin -> {credentials_mapping base_url default_page_class navigation skip_by_skin_names};
+      skin -> {credentials_mapping base_url default_page_class navigation
+               skip_by_skin_names};
       variables -> {credentials_mapping base_url} [color="grey"];
       request -> {skin skip_by_skin_names} [color="grey"];
       page_mappings -> {default_page_class base_page navigation}
