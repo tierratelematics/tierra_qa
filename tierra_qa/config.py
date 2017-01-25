@@ -36,5 +36,5 @@ DEFAULT_PAGES = {
 
 PAGE_MAPPINGS = {
     'HomePage': {'path': '/'},
-    'HelloPage': {'path': '/hellopage'},
+    'LoginPage': {'path': '/'},
 }
