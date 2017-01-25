@@ -6,8 +6,8 @@ A clean virtualenv is created, a package created from tierra_qa and
 the tests of that package are run.
 
 Because the is potentially really time consuming the scaffolding tests
-are marked with ``slow`` and are not run unless ``py.test`` is invoked with the
-``--runslow`` option.
+are marked with ``framework`` and are not run unless ``py.test`` is
+invoked with the``--framework`` option.
 
 The module name starts with ``test_zzz`` to make the contained tests always the
 last in a complete test run.
@@ -24,9 +24,8 @@ from copy import copy
 from tempfile import mkdtemp
 
 from pytest import fixture
-from pytest import mark
 
-slow = mark.slow
+from tierra_qa.testing import framework
 
 
 @fixture
@@ -66,11 +65,14 @@ def virtualenv(request, travis):
         env.update({'VIRTUAL_ENV': virtualenv_directory, })
 
         # install requirements.txt into the virtualenv
-        subprocess.check_call([
-            os.path.join('bin', 'pip'),
-            'install', '-r',
-            os.path.join(cwd, 'requirements.txt')],
-            env=env)
+        for req_file in ['requirements.txt',
+                         'tests_requirements.txt',
+                         'docs_requirements.txt']:
+            subprocess.check_call([
+                os.path.join('bin', 'pip'),
+                'install', '-r',
+                os.path.join(cwd, req_file)],
+                env=env)
 
         # setuptools-git is required to be able to call setup.py install
         # sucessfully.  also install psycopg2 and oursql.
@@ -94,11 +96,9 @@ def virtualenv(request, travis):
     request.addfinalizer(delete_virtualenv)
 
 
-@slow
+@framework
 def test_scaffold_tierra_qa(virtualenv, travis, splinter_webdriver):
-
     with travis.folding_output():
-
         # clone a project from the scaffold
         subprocess.check_call([
             os.path.join('bin', 'tierra_qa_clone'),
@@ -117,7 +117,7 @@ def test_scaffold_tierra_qa(virtualenv, travis, splinter_webdriver):
             '--variables', 'credentials_template.yml'])
 
 
-@slow
+@framework
 def test_scaffold_tierra_qa_clone_translate():
     """ Assert if internal _translate has been called with right input """
     import mock
@@ -129,7 +129,7 @@ def test_scaffold_tierra_qa_clone_translate():
             mock_translate.assert_called_once_with('new_name')
 
 
-@slow
+@framework
 def test_scaffold_tierra_qa_clone_translate_noinput():
     """ Assert if internal _translate has not been called without required
         parameters
@@ -143,7 +143,7 @@ def test_scaffold_tierra_qa_clone_translate_noinput():
             assert not mock_translate.called
 
 
-@slow
+@framework
 def test_scaffold_tierra_qa_clone_translate_nomock(tmpdir):
     """ _translate call should replicate tierra_qa structure """
     import os

@@ -6,14 +6,19 @@ version = '0.0.1dev'
 install_requires = [
     'pytest-bdd',
     'pytest-splinter',
-    'pytest-base-url',
-    'tox',
+    'pytest-variables[yaml]',
+    'pypom_form',
+    'colander',
+]
+
+tests_require = [
+    'pycodestyle',
     'pytest-cov',
-    'mock',
     'pytest-travis-fold',
     'virtualenv',  # needed for scaffolding tests
-    'pytest-variables[yaml]',
-    'PyPOM[splinter]',
+    'tox',
+    'mock',
+    'pytest-html',
 ]
 
 docs_require = [
@@ -50,5 +55,6 @@ setup(name='tierra_qa',
       """,
       extras_require={
           'docs': docs_require,
+          'tests': tests_require,
           },
       )

@@ -1,48 +1,74 @@
 # coding=utf-8
-"""
-    functional's conftest module.
+"""Login feature tests."""
 
-    Here you can place your *common* steps definition if they
-    are meant to be shared with different steps and reused.
-
-    You could organize your tests in modules, each of them with
-    a conftest.py module in order to create a scope hierarchy.
-"""
-
-try:
-    from urlparse import urljoin
-except ImportError:
-    # python3 compatibility
-    from urllib.parse import urljoin
-
+import uuid
+import pytest
 import pytest_bdd
 
 
-@pytest_bdd.given(pytest_bdd.parsers.parse('I am logged in as {user_id}'))
-def i_am_loggedin_given(user_id, page):
-    """Logged in fixture"""
-
-
-@pytest_bdd.then('I am logged in')
-def check_loggedin_then(page, username):
-    """Assert user is logged in. Implement here your
-       project related login logics.
+@pytest.fixture(scope='session')
+def test_run_identifier():
+    """ Return a session based random prefixed UUID used for
+        identifying data created in this test run.
     """
-    assert 1
+    return "QA-{0}".format(str(uuid.uuid1()))
+
+
+@pytest_bdd.given(pytest_bdd.parsers.parse('I am logged in as {user_id}'))
+def username(user_id, navigation):
+    """Login and returns username for the given user_id """
+    username, password = navigation.get_credentials(user_id)
+    navigation.page.login(username, password)
+    return username
+
+
+# we need to change step description due to a nasty limitation of pytest-bdd.
+# See https://github.com/pytest-dev/pytest-bdd/issues/199
+
+@pytest_bdd.given(pytest_bdd.parsers.parse(
+    '[outline] I am on the <page_id> page'))
+@pytest_bdd.given(pytest_bdd.parsers.parse(
+    'I am on the {page_id} page'))
+def loggedin_page_given_outline(page_id, navigation):
+    """Logged in fixture"""
+    navigation.visit_page(page_id)
+
+
+def _check_page_url(page, page_id):
+    """ Check page url matches used by several BDD steps.
+        Page is not a dictionary but the page object.
+    """
+    assert page.navigation.get_page_url(page_id) in page.current_url
 
 
 @pytest_bdd.when(pytest_bdd.parsers.parse(
-    'I visit the {page_id_nofollow} page'))
-def visit_example_page(page, page_id_nofollow, page_mappings, base_url):
-    """Dummy given."""
-    url = urljoin(base_url,
-                  page_mappings[page_id_nofollow]['path'])
-    page.driver.visit(url)
+    'I visit the {page_id} page'))
+def visit_page(navigation, page_id):
+    """Visit the page."""
+    navigation.visit_page(page_id)
+
+
+@pytest_bdd.when(pytest_bdd.parsers.parse(
+    'I logout from the application'))
+def check_logout_when(navigation):
+    """Check the user logout."""
+    page = navigation.page
+    page.logout()
 
 
 @pytest_bdd.then(pytest_bdd.parsers.parse(
-    'I land on the {page_id_nofollow} page'))
-def check_example_page_url(page, base_url, page_id_nofollow, page_mappings):
+    'the page contains text <text>'))
+def page_text_check(navigation, text):
+    page = navigation.page
+    assert page.has_text(text)
+
+
+@pytest_bdd.then(pytest_bdd.parsers.parse(
+    'I land on the {page_id} page'))
+@pytest_bdd.then(pytest_bdd.parsers.parse(
+    'I land on the <page_id> page'))
+def check_page_url_no_follow(navigation,
+                             page_id):
     """ Check page url matches """
-    assert page.current_url == urljoin(base_url,
-                                       page_mappings[page_id_nofollow]['path'])
+    page = navigation.page
+    _check_page_url(page, page_id)

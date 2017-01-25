@@ -4,10 +4,11 @@ Base page implementation
 
 This is where the base page implementation lives.
 """
-from pypom import Page
+
+from pypom_form.form import BaseFormPage
 
 
-class BasePage(Page):
+class BasePage(BaseFormPage):
     """
         This is the base page to be used in tierra_qa.
 
@@ -17,6 +18,7 @@ class BasePage(Page):
         * add your own page object classes depending on your business
           logics inheriting from this base class
     """
+    navigation = None
 
     def login(self, username, password):
         """
@@ -24,8 +26,10 @@ class BasePage(Page):
 
             It's up to you implement this method once you cloned
             tierra_qa.
+
+            :return: BasePage instance
+            :rtype: object
         """
-        pass
 
     def is_loggedin(self):
         """
@@ -37,7 +41,19 @@ class BasePage(Page):
             :return: True if you are logged in or False
             :rtype: bool
         """
-        pass
+        return True
+
+    def username(self):
+        """
+            This is the username method of the base page object.
+
+            It's up to you implement this method once you cloned
+            tierra_qa.
+
+            :return: the username or None
+            :rtype: string or None
+        """
+        return 'admin'
 
     def logout(self):
         """
@@ -45,8 +61,10 @@ class BasePage(Page):
 
             It's up to you implement this method once you cloned
             tierra_qa.
+
+            :return: BasePage instance
+            :rtype: object
         """
-        pass
 
     @property
     def current_url(self):
@@ -57,3 +75,22 @@ class BasePage(Page):
             :rtype: str
         """
         return self.driver.url
+
+    def wait_for_url_change(self, url):
+        """
+            Wait for url change occurred.
+
+            :return: BasePage instance
+            :rtype: object
+        """
+        self.wait.until(lambda s: self.current_url != url)
+        return self
+
+    def has_text(self, text):
+        """
+            Check for text in page.
+
+            :return: True if the given text is present
+            :rtype: bool
+        """
+        return self.driver.is_text_present(text, wait_time=self.timeout)
