@@ -146,7 +146,6 @@ def test_scaffold_tierra_qa_clone_translate_noinput():
 @framework
 def test_scaffold_tierra_qa_clone_translate_nomock(tmpdir):
     """ _translate call should replicate tierra_qa structure """
-    import os
     import mock
     previous_path = os.getcwd()
     os.chdir(tmpdir.strpath)
