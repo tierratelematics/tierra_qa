@@ -5,6 +5,7 @@
 *.swp
 *.log
 *.xml
+*.html
 .tox
 .eggs/
 python
