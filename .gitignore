@@ -15,3 +15,5 @@ bin/*
 tierra_qa/screenshots/*
 /docs/_build/
 .coverage
+credentials.yml
+credentials-*.yml
