@@ -1,6 +1,5 @@
 import sys
 import os
-import string
 import shutil
 import optparse
 import textwrap
@@ -81,9 +80,8 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
             for trans in trans_map:
                 old = trans[0]
                 new = trans[1]
-                file_contents = string.replace(file_contents, old, new)
-                file_contents = string.replace(
-                    file_contents,
+                file_contents = file_contents.replace(old, new)
+                file_contents = file_contents.replace(
                     old.capitalize(),
                     new.capitalize())
 
@@ -98,7 +96,7 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
                 new = trans[1]
                 if old in item_file_path:
                     old_path = item_file_path
-                    new_path = string.replace(old_path, old, new)
+                    new_path = old_path.replace(old, new)
                     os.rename(os.path.join(item_path, old_path),
                               os.path.join(item_path, new_path))
                     break
@@ -109,7 +107,7 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
                 new = trans[1]
                 if old in item_dir_path:
                     old_path = item_dir_path
-                    new_path = string.replace(old_path, old, new)
+                    new_path = old_path.replace(old, new)
                     os.rename(os.path.join(item_path, old_path),
                               os.path.join(item_path, new_path))
                     break
