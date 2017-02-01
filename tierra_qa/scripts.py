@@ -1,6 +1,5 @@
 import sys
 import os
-import string
 import shutil
 import optparse
 import textwrap
@@ -70,26 +69,41 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
         for item_file_path in item_file_paths:
             # read the file and substitute patterns
             file_contents = ''
-            # TODO: avoid rewriting of '*.png', '*.gif',
-            # '*.svg', '*.ico', '*.jpg'
-            # TODO: avoid duplicated open files
-            with open(os.path.join(item_path,
-                                   item_file_path), 'r') as file_to_filter:
-                file_contents = file_to_filter.read()
 
-            # translate file
-            for trans in trans_map:
-                old = trans[0]
-                new = trans[1]
-                file_contents = string.replace(file_contents, old, new)
-                file_contents = string.replace(
-                    file_contents,
-                    old.capitalize(),
-                    new.capitalize())
+            # Ugly workaround, planned migration to cookiecutter
+            translate = False
+            mode = 'r'
+            try:
+                with open(os.path.join(item_path,
+                                       item_file_path), 'r') as file_to_filter:
+                    file_contents = file_to_filter.read()
+                    translate = True
+            except UnicodeDecodeError:
+                mode = 'rb'
+                with open(os.path.join(
+                              item_path,
+                              item_file_path), mode) as file_to_filter:
+                    file_contents = file_to_filter.read()
+
+            if translate:
+                # translate file
+                for trans in trans_map:
+                    old = trans[0]
+                    new = trans[1]
+                    file_contents = file_contents.replace(old, new)
+                    file_contents = file_contents.replace(
+                        old.capitalize(),
+                        new.capitalize())
+
+            if mode == 'r':
+                write_mode = 'w'
+            else:
+                write_mode = 'wb'
 
             # write translated version of file
-            with open(os.path.join(item_path,
-                                   item_file_path), 'w') as file_to_filter:
+            with open(os.path.join(
+                    item_path,
+                    item_file_path), write_mode) as file_to_filter:
                 file_to_filter.write(file_contents)
 
             # rename files
@@ -98,7 +112,7 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
                 new = trans[1]
                 if old in item_file_path:
                     old_path = item_file_path
-                    new_path = string.replace(old_path, old, new)
+                    new_path = old_path.replace(old, new)
                     os.rename(os.path.join(item_path, old_path),
                               os.path.join(item_path, new_path))
                     break
@@ -109,7 +123,7 @@ def _translate(new_package_name, original_package_name='tierra_qa'):
                 new = trans[1]
                 if old in item_dir_path:
                     old_path = item_dir_path
-                    new_path = string.replace(old_path, old, new)
+                    new_path = old_path.replace(old, new)
                     os.rename(os.path.join(item_path, old_path),
                               os.path.join(item_path, new_path))
                     break
