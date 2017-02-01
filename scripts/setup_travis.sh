@@ -12,7 +12,7 @@ if [ "${DRIVER}" = "phantomjs" ]; then
 fi
 
 if [ "${DRIVER}" = "firefox" ]; then
-  wget -O - https://github.com/mozilla/geckodriver/releases/download/v0.10.0/geckodriver-v0.10.0-linux64.tar.gz | tar xvzf -
+  wget -O - https://github.com/mozilla/geckodriver/releases/download/v0.14.0/geckodriver-v0.14.0-linux64.tar.gz | tar xvzf -
   mv geckodriver bin
   geckodriver --version
 fi
