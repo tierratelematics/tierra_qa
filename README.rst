@@ -20,7 +20,7 @@ tierra_qa
 
 
 ``tierra_qa`` is a package that aims to find a new repeatable pattern for 
-black box QA testing applied to any web application.
+QA testing applied to any web application.
 
 It is internally based on:
 
@@ -30,18 +30,14 @@ It is internally based on:
 * `PyPOM`_
 * `pypom_form`_
 
+
 Why py.test
 ===========
 
-``py.test`` is one of the most promising test frameworks built with Python. It is a generic
-framework, so it is not bound to the BDD practise.
-So if you are going to test a Python based application, you'll have a unique BDD tool
-integrated with the unit, integration and functional tests running just only a command.
+``py.test`` is a Python test framework that provides a clever dependency injection
+mechanism for fixture management with strong focus on reusability and modularity.
 
-It provides a clever dependency injection mechanism for fixture creations and its focus is
-minimizing the amount of test code, reusability and modularity.
-
-More links:
+Know more:
 
 * http://pytest.org
 * https://pytest.org/latest/fixture.html
