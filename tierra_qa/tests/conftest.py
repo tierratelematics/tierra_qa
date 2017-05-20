@@ -62,6 +62,21 @@ def skin(request):
 
 
 @pytest.fixture(scope="session")
+def default_pages():
+    """ A mapping with the default page object class for each skin
+
+        It's up to you override this fixture with your settings.
+
+        For example::
+
+            DEFAULT_PAGES = {
+                'skin1': 'mypackage.pages.BasePage',
+            }
+    """
+    return {'skin1': 'tierra_qa.pages.BasePage'}
+
+
+@pytest.fixture(scope="session")
 def page_mappings():
     """
         Returns the page mappings dictionary with all known page with:
