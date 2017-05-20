@@ -44,6 +44,7 @@ import os
 import pytest
 
 import tierra_qa
+from tierra_qa.config import DEFAULT_PAGES
 
 
 @pytest.fixture
@@ -52,7 +53,7 @@ def pytestbdd_feature_base_dir():
     return os.path.join(os.path.dirname(tierra_qa.__file__), 'features')
 
 
-@pytest.fixture(scope='session', params=tierra_qa.config.DEFAULT_PAGES.keys())
+@pytest.fixture(scope='session', params=DEFAULT_PAGES.keys())
 def skin(request):
     """ This fixture provides the skin associated with the application
         on which starts the test session.
