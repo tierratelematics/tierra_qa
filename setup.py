@@ -50,8 +50,6 @@ setup(name='tierra_qa',
       install_requires=install_requires,
       entry_points="""
       # -*- Entry points: -*-
-      [console_scripts]
-      tierra_qa_clone = tierra_qa.scripts:tierra_qa_clone
       """,
       extras_require={
           'docs': docs_require,
