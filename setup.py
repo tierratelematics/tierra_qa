@@ -15,8 +15,6 @@ install_requires = [
 tests_require = [
     'pycodestyle',
     'pytest-cov',
-    'pytest-travis-fold',
-    'virtualenv',  # needed for scaffolding tests
     'tox',
     'mock',
     'pytest-html',
