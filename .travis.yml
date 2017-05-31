@@ -49,7 +49,7 @@ before_script:
 script:
   - export PATH="$PATH:`pwd`/bin"
   - ./scripts/setup_travis.sh
-  - tox -e ${TOXENV}
+  - tox -e ${TOXENV} -- --variables credentials_template.yml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -e ${TOXENV}

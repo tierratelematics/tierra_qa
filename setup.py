@@ -8,14 +8,13 @@ install_requires = [
     'pytest-splinter',
     'pytest-variables[yaml]',
     'pypom_form',
+    # 'pytest-pypom-navigation',
     'colander',
 ]
 
 tests_require = [
     'pycodestyle',
     'pytest-cov',
-    'pytest-travis-fold',
-    'virtualenv',  # needed for scaffolding tests
     'tox',
     'mock',
     'pytest-html',
@@ -38,6 +37,9 @@ setup(name='tierra_qa',
           "Framework :: Pytest",
           "Topic :: Software Development :: Testing",
           "License :: OSI Approved :: Apache Software License",
+          "Programming Language :: Python :: 3.5",
+          "Programming Language :: Python :: 3.6",
+          "Programming Language :: Python :: Implementation :: PyPy",
           ],
       keywords='',
       author='Tierra QA Team',
@@ -50,8 +52,6 @@ setup(name='tierra_qa',
       install_requires=install_requires,
       entry_points="""
       # -*- Entry points: -*-
-      [console_scripts]
-      tierra_qa_clone = tierra_qa.scripts:tierra_qa_clone
       """,
       extras_require={
           'docs': docs_require,

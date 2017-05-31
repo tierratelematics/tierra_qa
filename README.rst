@@ -22,6 +22,8 @@ tierra_qa
 ``tierra_qa`` is a package that aims to find a new repeatable pattern for 
 QA testing applied to any web application.
 
+**Notes**: tierra_qa will be replaced by the **cookiecutter-qa** (https://github.com/tierratelematics/cookiecutter-qa) project template!
+
 It is internally based on:
 
 * `pytest`_
@@ -64,7 +66,7 @@ How to use it
 
 Once installed you can launch tests with::
 
-    $ py.test --splinter-webdriver=firefox --variables credentials_template.yml [--base-url http://anotherurl.com/]
+    $ tox -epy36 -- --variables credentials_template.yml
 
 With the ``--variables`` parameter you can read user credentials from a YAML file like that::
 
@@ -84,18 +86,6 @@ The YAML file 'credentials_template.yml' has to be considered only a template fo
 If you use Travis CI (http://travis-ci.org/) you can encrypt files with sensible information:
 
 * https://docs.travis-ci.com/user/encrypting-files/
-
-By default the default ``base_url`` is http://tierratelematics.com/ and you can change it editing the
-``setup.cfg`` file.
-
-How to create your own qa package
-=================================
-
-Once you have installed ``tierra_qa`` you can create your own package typing the following command::
-
-    $ tierra_qa_clone YOURPACKAGE_QA
-
-*Note well*: planned migration to cookiecutter for scaffolding. 
 
 .. _pytest: http://doc.pytest.org
 .. _pytest_splinter: http://pytest-splinter.readthedocs.io
