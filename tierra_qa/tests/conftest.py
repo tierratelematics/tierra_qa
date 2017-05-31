@@ -8,31 +8,10 @@ created in the ``tierra_qa`` package:
 .. graphviz::
 
    digraph {
-      credentials_mapping;
       skin;
-      base_url;
       page_mappings,
-      default_page_class;
-      base_page;
-      page_instance;
-      navigation;
-      navigation_class;
-      skip_by_skin_names;
-      variables [color="grey"];
       request [color="grey"];
-      browser [color="grey"];
-      skin -> {credentials_mapping base_url default_page_class navigation
-               skip_by_skin_names};
-      variables -> {credentials_mapping base_url} [color="grey"];
-      request -> {skin skip_by_skin_names} [color="grey"];
-      page_mappings -> {default_page_class base_page navigation}
-      base_url -> {base_page navigation};
-      browser -> {base_page} [color="grey"];
-      default_page_class -> {base_page navigation};
-      base_page -> {page_instance};
-      navigation_class -> {navigation};
-      page_instance -> {navigation};
-      credentials_mapping -> {navigation};
+      request -> {skin} [color="grey"];
    }
 
 
