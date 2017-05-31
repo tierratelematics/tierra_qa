@@ -21,6 +21,7 @@ matrix:
   allow_failures:
   - env: TOXENV=firefox
   - env: TOXENV=chrome
+  - env: TOXENV=linkcheck
   - python: "3.5"
   exclude:
   - python: "3.5"
