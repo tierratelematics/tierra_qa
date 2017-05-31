@@ -22,6 +22,8 @@ tierra_qa
 ``tierra_qa`` is a package that aims to find a new repeatable pattern for 
 QA testing applied to any web application.
 
+**Notes**: tierra_qa will be replaced by the **cookiecutter-qa** (https://github.com/tierratelematics/cookiecutter-qa) project template!
+
 It is internally based on:
 
 * `pytest`_
