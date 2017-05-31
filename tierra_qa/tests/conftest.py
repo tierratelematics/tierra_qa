@@ -10,8 +10,8 @@ created in the ``tierra_qa`` package:
    digraph {
       skin;
       page_mappings,
-      request [color="grey"];
-      request -> {skin} [color="grey"];
+      request;
+      request -> {skin};
    }
 
 
