@@ -57,9 +57,7 @@ Prerequisites:
 
 Clone the ``tierra_qa`` package and run::
 
-    $ pip install -r requirements.txt
-    $ pip install -r tests_requirements.txt
-    $ python setup.py develop
+    $ pip install tox
 
 How to use it
 =============
